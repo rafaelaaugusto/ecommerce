@@ -22,4 +22,19 @@ class ProductModel {
     this.department,
     this.details,
   });
+
+  factory ProductModel.fromJson(Map<String, dynamic> data) {
+    return ProductModel(
+      id: data['id'],
+      name: data['name'],
+      description: data['description'],
+      price: data['price'],
+      hasDiscount: data['hasDiscount'] ?? false,
+      discountValue: data['discountValue'],
+      gallery: List<String>.from(data['gallery'] ?? []),
+      material: data['material'],
+      department: data['department'],
+      details: data['details'],
+    );
+  }
 }
