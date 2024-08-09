@@ -3,6 +3,7 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 
 import '../components/product_image_component.dart';
+import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
 
 class ProductDetailsView extends StatelessWidget {
@@ -66,13 +67,13 @@ class ProductDetailsView extends StatelessWidget {
               if (product.description.isNotBlank)
                 buildSection(
                   context: context,
-                  title: 'Descrição do produto',
+                  title: 'Descrição',
                   text: product.description ?? '',
                 ),
               if (product.department.isNotBlank)
                 buildSection(
                   context: context,
-                  title: 'Departamento',
+                  title: 'Categoria',
                   text: product.department ?? '',
                 ),
               if (product.material.isNotBlank)
@@ -97,15 +98,6 @@ class ProductDetailsView extends StatelessWidget {
       ),
     );
   }
-}
-
-String getPercentualValue(String value) {
-  String discount = (double.parse(value) * 100).toString();
-  String discountFormatted = discount.endsWith('.0')
-      ? discount.substring(0, discount.length - 2)
-      : discount;
-
-  return '$discountFormatted% off';
 }
 
 Widget buildSection({

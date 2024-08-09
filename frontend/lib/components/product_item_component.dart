@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 
+import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
 import 'product_image_component.dart';
 
@@ -49,15 +50,28 @@ class ProductItem extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(fontSize: 11),
                   ),
-                  Text(
-                    UtilBrasilFields.obterReal(
-                      double.parse(product.price),
-                      moeda: true,
-                    ),
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(fontSize: Insets.xl),
+                  Row(
+                    children: [
+                      Text(
+                        UtilBrasilFields.obterReal(
+                          double.parse(product.price),
+                          moeda: true,
+                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(fontSize: Insets.xl),
+                      ),
+                      const SizedBox(width: Insets.m),
+                      if (product.hasDiscount &&
+                          product.discountValue.isNotBlank)
+                        Badge(
+                          backgroundColor: Colors.red.shade200,
+                          label: Text(
+                            getPercentualValue(product.discountValue!),
+                          ),
+                        ),
+                    ],
                   ),
                   Text(
                     product.description ?? '',
