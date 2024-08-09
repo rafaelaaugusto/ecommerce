@@ -26,9 +26,7 @@ class _ProductsListState extends State<ProductsList> {
           runSpacing: Insets.l * 2,
           children: widget.products
               .map(
-                (product) => ProductItem(
-                  product: product,
-                ),
+                (product) => ProductItem(product: product),
               )
               .toList(),
         ),

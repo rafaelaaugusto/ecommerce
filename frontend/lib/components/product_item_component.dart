@@ -1,3 +1,4 @@
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 
@@ -36,29 +37,37 @@ class ProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 150,
-              child: ProductImage(itemId: product.id),
-            ),
+            ProductImage(itemId: product.id),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(Insets.m),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.name,
+                    product.name.toUpperCase(),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(fontSize: 11),
                   ),
-                  Text(product.price),
+                  Text(
+                    UtilBrasilFields.obterReal(
+                      double.parse(product.price),
+                      moeda: true,
+                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .titleLarge
+                        ?.copyWith(fontSize: Insets.xl),
+                  ),
                   Text(
                     product.description ?? '',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.labelSmall,
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
