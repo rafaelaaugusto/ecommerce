@@ -16,7 +16,6 @@ async function fetchProductsFromBrasilianSupplier(){
         material: product.material,
         department: product.departamento,
         gallery: [product.imagem],
-
     }));
 }
 
@@ -32,7 +31,6 @@ async function fetchProductsFromEuropeanSupplier(){
         gallery: product.gallery,
         material: product.details.material,
         details: product.details,
-
     }));
 }
 
@@ -41,7 +39,7 @@ async function getAllProducts(){
         fetchProductsFromBrasilianSupplier(),
         fetchProductsFromEuropeanSupplier(),
     ]);
-    
+
     return [...brasilianProducts, ...europeanProducts];
 }
 

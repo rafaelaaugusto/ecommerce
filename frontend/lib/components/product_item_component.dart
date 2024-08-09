@@ -2,6 +2,7 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product_model.dart';
+import 'product_image_component.dart';
 
 class ProductItem extends StatelessWidget {
   final ProductModel product;
@@ -14,7 +15,13 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          '/product-details',
+          arguments: product,
+        );
+      },
       borderRadius: BorderRadius.circular(Insets.xl),
       child: Container(
         width: 150,
@@ -29,17 +36,9 @@ class ProductItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(Insets.l),
-                topRight: Radius.circular(Insets.l),
-              ),
-              child: Image.network(
-                'https://picsum.photos/150/?random=${product.id}',
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) =>
-                    Image.asset('images/notfound.jpg'),
-              ),
+            SizedBox(
+              height: 150,
+              child: ProductImage(itemId: product.id),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),

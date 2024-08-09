@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/theme_provider.dart';
+import 'theme/styles_theme.dart';
 import 'views/home_view.dart';
+import 'views/product_details_view.dart';
 
 void main() {
   runApp(
@@ -24,10 +26,16 @@ class _AppState extends ConsumerState<App> {
   Widget build(BuildContext context) {
     final defaultProvider = ref.read(themeProvider);
 
-    return MaterialApp(
-      theme: defaultProvider.theme,
-      debugShowCheckedModeBanner: false,
-      home: HomeView(),
+    return FutureBuilder(
+      future: downloadGoogleFonts(),
+      builder: (context, snapshot) => MaterialApp(
+        theme: defaultProvider.theme,
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => const HomeView(),
+          '/product-details': (context) => const ProductDetailsView(),
+        },
+      ),
     );
   }
 }
