@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../components/products_list_component.dart';
+import '../components/search_filter_component.dart';
 import '../models/product_model.dart';
 import '../services/product_service.dart';
 
@@ -36,11 +38,19 @@ class _HomeViewState extends State<HomeView> {
       body: hasError
           ? const Center(child: Text('Erro ao carregar ativos.'))
           : products.isNotEmpty
-              ? ListView.builder(
-                  itemCount: products.length,
-                  itemBuilder: (context, index) => Text(products[index].name),
+              ? Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  child: Column(
+                    children: [
+                      SearchFilter(),
+                      ProductsList(
+                        products: products,
+                      )
+                    ],
+                  ),
                 )
-              : const CircularProgressIndicator(),
+              : Center(child: const CircularProgressIndicator()),
     );
   }
 }
