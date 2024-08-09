@@ -12,5 +12,6 @@ class ThemeProvider {
     appBarTheme: appBarTheme,
     inputDecorationTheme: inputDecorationTheme,
     textTheme: textTheme,
+    iconTheme: iconThemeData,
   );
 }

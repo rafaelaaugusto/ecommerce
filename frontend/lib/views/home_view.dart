@@ -36,21 +36,23 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: hasError
-          ? const Center(child: Text('Erro ao carregar ativos.'))
+          ? const Center(child: Text('Erro ao carregar produtos.'))
           : products.isNotEmpty
               ? Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 30,
+                  ),
                   child: Column(
                     children: [
                       SearchFilter(),
-                      ProductsList(
-                        products: products,
-                      )
+                      ProductsList(products: products),
                     ],
                   ),
                 )
-              : Center(child: const CircularProgressIndicator()),
+              : const Center(
+                  child: CircularProgressIndicator(),
+                ),
     );
   }
 }

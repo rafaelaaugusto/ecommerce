@@ -55,8 +55,11 @@ const inputDecorationTheme = InputDecorationTheme(
 );
 
 const appBarTheme = AppBarTheme(
+  actionsIconTheme: iconThemeData,
   centerTitle: true,
   iconTheme: IconThemeData(
     color: secondary,
   ),
 );
+
+const iconThemeData = IconThemeData(color: primary);

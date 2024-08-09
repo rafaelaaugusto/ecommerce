@@ -19,6 +19,12 @@ class ProductDetailsView extends StatelessWidget {
           'Sobre o Produto',
           style: Theme.of(context).textTheme.titleMedium,
         ),
+        actions: const [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: Insets.xxl),
+            child: Icon(Icons.shopping_cart),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(Insets.l * 2),
