@@ -16,5 +16,6 @@ class ThemeProvider {
     elevatedButtonTheme: elevatedButtonThemeData,
     snackBarTheme: snackBarThemeData,
     dialogTheme: dialogThemeData,
+    bottomSheetTheme: bottomSheetThemeData,
   );
 }

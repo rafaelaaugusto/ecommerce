@@ -59,6 +59,8 @@ final appBarTheme = AppBarTheme(
     color: secondary,
     fontSize: Insets.xxl,
   ),
+  elevation: 0,
+  scrolledUnderElevation: 0,
   actionsIconTheme: iconThemeData,
   centerTitle: true,
   iconTheme: const IconThemeData(
@@ -102,3 +104,5 @@ final elevatedButtonOutlinedThemeData = ElevatedButtonThemeData(
 const snackBarThemeData = SnackBarThemeData(backgroundColor: secondary);
 
 const dialogThemeData = DialogTheme(elevation: 0);
+
+const bottomSheetThemeData = BottomSheetThemeData(elevation: 0);

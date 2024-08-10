@@ -1,17 +1,21 @@
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/theme/colors_theme.dart';
 
 class SearchFilter extends StatelessWidget {
-  const SearchFilter({super.key});
+  final Function(String) filterByText;
+
+  const SearchFilter({
+    super.key,
+    required this.filterByText,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: Insets.xxl * 2),
+      padding: const EdgeInsets.only(bottom: Insets.xxl * 2),
       child: TextField(
-        cursorColor: onSurface,
-        onChanged: (_) {},
+        onChanged: filterByText,
+        cursorColor: Theme.of(context).colorScheme.onSurface,
         decoration: const InputDecoration(
           hintText: 'O que você precisa?',
         ),
