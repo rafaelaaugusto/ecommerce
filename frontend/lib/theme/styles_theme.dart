@@ -54,12 +54,48 @@ const inputDecorationTheme = InputDecorationTheme(
   contentPadding: EdgeInsets.all(Insets.l),
 );
 
-const appBarTheme = AppBarTheme(
+final appBarTheme = AppBarTheme(
+  titleTextStyle: GoogleFonts.lato(
+    color: secondary,
+    fontWeight: FontWeight.bold,
+    fontSize: Insets.xxl,
+  ),
   actionsIconTheme: iconThemeData,
   centerTitle: true,
-  iconTheme: IconThemeData(
+  iconTheme: const IconThemeData(
     color: secondary,
   ),
 );
 
 const iconThemeData = IconThemeData(color: primary);
+
+final elevatedButtonThemeData = ElevatedButtonThemeData(
+  style: ElevatedButton.styleFrom(
+    elevation: 0,
+    backgroundColor: primary,
+    foregroundColor: onPrimary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(Insets.m),
+    ),
+    padding: const EdgeInsets.all(Insets.xxl),
+    textStyle: GoogleFonts.lato(
+      fontSize: Insets.xxl,
+    ),
+  ),
+);
+
+final elevatedButtonOutlinedThemeData = ElevatedButtonThemeData(
+  style: ElevatedButton.styleFrom(
+    elevation: 0,
+    backgroundColor: onPrimary,
+    foregroundColor: primary,
+    shape: RoundedRectangleBorder(
+      side: const BorderSide(color: primary),
+      borderRadius: BorderRadius.circular(Insets.m),
+    ),
+    padding: const EdgeInsets.all(14),
+    textStyle: GoogleFonts.lato(
+      fontSize: Insets.xxl,
+    ),
+  ),
+);

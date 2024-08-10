@@ -1,29 +1,39 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/theme/styles_theme.dart';
 
 import '../components/product_image_component.dart';
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
+import '../providers/shopping_cart_provider.dart';
 
-class ProductDetailsView extends StatelessWidget {
+class ProductDetailsView extends ConsumerWidget {
   const ProductDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final cartProvider = ref.watch(shoppingCartProvider);
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Sobre o Produto',
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: Insets.xxl),
-            child: Icon(Icons.shopping_cart),
+        title: const Text('Sobre o Produto'),
+        actions: [
+          InkWell(
+            borderRadius: BorderRadius.circular(Insets.xxl * 2),
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/shopping-cart',
+              );
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: Insets.xxl),
+              child: Icon(Icons.shopping_cart),
+            ),
           ),
         ],
       ),
@@ -92,9 +102,35 @@ class ProductDetailsView extends StatelessWidget {
           ),
         ),
       ),
-      bottomSheet: ElevatedButton(
-        onPressed: () {},
-        child: Text('Comprar'),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 10,
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                style: elevatedButtonOutlinedThemeData.style,
+                onPressed: () {
+                  cartProvider.addProduct(product);
+                },
+                child: const Icon(
+                  Icons.add_shopping_cart,
+                ),
+              ),
+            ),
+            const SizedBox(width: Insets.m),
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () {
+                  cartProvider.addProduct(product);
+                },
+                child: const Text('Comprar agora'),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

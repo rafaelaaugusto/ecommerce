@@ -5,6 +5,7 @@ import 'providers/theme_provider.dart';
 import 'theme/styles_theme.dart';
 import 'views/home_view.dart';
 import 'views/product_details_view.dart';
+import 'views/shopping_cart_view.dart';
 
 void main() {
   runApp(
@@ -34,6 +35,7 @@ class _AppState extends ConsumerState<App> {
         routes: {
           '/': (context) => const HomeView(),
           '/product-details': (context) => const ProductDetailsView(),
+          '/shopping-cart': (context) => const ShoppingCartView(),
         },
       ),
     );

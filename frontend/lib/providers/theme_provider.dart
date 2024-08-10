@@ -13,5 +13,6 @@ class ThemeProvider {
     inputDecorationTheme: inputDecorationTheme,
     textTheme: textTheme,
     iconTheme: iconThemeData,
+    elevatedButtonTheme: elevatedButtonThemeData,
   );
 }
