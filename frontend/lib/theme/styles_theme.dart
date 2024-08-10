@@ -57,7 +57,6 @@ const inputDecorationTheme = InputDecorationTheme(
 final appBarTheme = AppBarTheme(
   titleTextStyle: GoogleFonts.lato(
     color: secondary,
-    fontWeight: FontWeight.bold,
     fontSize: Insets.xxl,
   ),
   actionsIconTheme: iconThemeData,

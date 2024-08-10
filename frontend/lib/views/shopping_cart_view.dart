@@ -24,78 +24,82 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
       appBar: AppBar(
         title: const Text('Carrinho'),
       ),
-      body: ListView.separated(
-        padding: const EdgeInsets.all(Insets.l * 2),
-        itemCount: cartProvider.productCount,
-        itemBuilder: (context, index) {
-          final product = cartProvider.productList[index];
-          return ListTile(
-            contentPadding: const EdgeInsets.symmetric(
-              vertical: Insets.xl,
-              horizontal: Insets.m,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(Insets.m),
-              side: BorderSide(
-                color: Theme.of(context).colorScheme.primaryContainer,
-              ),
-            ),
-            title: Text(
-              product.name,
-              style: Theme.of(context).textTheme.titleSmall,
-            ),
-            subtitle: Row(
-              children: [
-                Text(
-                  UtilBrasilFields.obterReal(
-                    double.parse(product.price),
-                    moeda: true,
+      body: cartProvider.productCount > 0
+          ? ListView.separated(
+              padding: const EdgeInsets.all(Insets.l * 2),
+              itemCount: cartProvider.productCount,
+              itemBuilder: (context, index) {
+                final product = cartProvider.productList[index];
+                return ListTile(
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: Insets.xl,
+                    horizontal: Insets.m,
                   ),
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge
-                      ?.copyWith(fontSize: Insets.xl),
-                ),
-                const SizedBox(width: Insets.m),
-                if (product.hasDiscount && product.discountValue.isNotBlank)
-                  Badge(
-                    backgroundColor: Colors.red.shade200,
-                    label: Text(
-                      getPercentualValue(product.discountValue!),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(Insets.m),
+                    side: BorderSide(
+                      color: Theme.of(context).colorScheme.primaryContainer,
                     ),
                   ),
-              ],
-            ),
-            leading: ProductImage(
-              itemId: product.id,
-            ),
-            trailing: IconButton(
-              icon: const Icon(
-                Icons.close,
-              ),
-              color: Colors.red,
-              onPressed: () {
-                showAdaptiveDialog(
-                  context: context,
-                  builder: (context) => RemoveProductDialog(
+                  title: Text(
+                    product.name,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Text(
+                        UtilBrasilFields.obterReal(
+                          double.parse(product.price),
+                          moeda: true,
+                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleLarge
+                            ?.copyWith(fontSize: Insets.xl),
+                      ),
+                      const SizedBox(width: Insets.m),
+                      if (product.hasDiscount &&
+                          product.discountValue.isNotBlank)
+                        Badge(
+                          backgroundColor: Colors.red.shade200,
+                          label: Text(
+                            getPercentualValue(product.discountValue!),
+                          ),
+                        ),
+                    ],
+                  ),
+                  leading: ProductImage(
+                    itemId: product.id,
+                  ),
+                  trailing: IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                    ),
+                    color: Colors.red,
                     onPressed: () {
-                      cartProvider.removeProduct(product);
+                      showAdaptiveDialog(
+                        context: context,
+                        builder: (context) => RemoveProductDialog(
+                          onPressed: () {
+                            cartProvider.removeProduct(product);
+                          },
+                        ),
+                      );
                     },
                   ),
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/product-details',
+                      arguments: product,
+                    );
+                  },
                 );
               },
-            ),
-            onTap: () {
-              Navigator.pushNamed(
-                context,
-                '/product-details',
-                arguments: product,
-              );
-            },
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: Insets.xl),
-      ),
+              separatorBuilder: (context, index) =>
+                  const SizedBox(height: Insets.xl),
+            )
+          : emptyData(),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.l * 2,
@@ -112,11 +116,33 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: cartProvider.productCount > 0 ? () {} : null,
               child: const Text('Continuar'),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget emptyData() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.shopping_cart_rounded,
+            color: Theme.of(context).colorScheme.onSecondary,
+            size: Insets.xxl * 2,
+          ),
+          const SizedBox(height: Insets.l),
+          Text(
+            'Carrinho vazio...',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+          ),
+        ],
       ),
     );
   }
