@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:frontend/theme/styles_theme.dart';
 
 import '../components/product_image_component.dart';
+import '../components/shopping_cart_icon_component.dart';
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
 import '../providers/shopping_cart_provider.dart';
@@ -22,18 +23,14 @@ class ProductDetailsView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Sobre o Produto'),
         actions: [
-          InkWell(
-            borderRadius: BorderRadius.circular(Insets.xxl * 2),
-            onTap: () {
+          ShoppingCartIcon(
+            onPressed: () {
               Navigator.pushNamed(
                 context,
                 '/shopping-cart',
               );
             },
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: Insets.xxl),
-              child: Icon(Icons.shopping_cart),
-            ),
+            productCount: cartProvider.productCount,
           ),
         ],
       ),
