@@ -99,3 +99,7 @@ final elevatedButtonOutlinedThemeData = ElevatedButtonThemeData(
     ),
   ),
 );
+
+const snackBarThemeData = SnackBarThemeData(backgroundColor: secondary);
+
+const dialogThemeData = DialogTheme(elevation: 0);

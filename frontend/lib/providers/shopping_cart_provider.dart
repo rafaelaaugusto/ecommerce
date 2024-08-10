@@ -13,9 +13,7 @@ class ShoppingCartProvider extends ChangeNotifier {
   List<ProductModel> get productList => [...products];
   int get productCount => products.length;
   double get totalValue => products.fold(
-        0,
-        (previousValue, prod) => double.parse(prod.price),
-      );
+      0, (previousValue, prod) => double.parse(prod.price) + previousValue);
 
   void addProduct(ProductModel product) {
     products.add(product);

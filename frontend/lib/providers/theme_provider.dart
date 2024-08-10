@@ -14,5 +14,7 @@ class ThemeProvider {
     textTheme: textTheme,
     iconTheme: iconThemeData,
     elevatedButtonTheme: elevatedButtonThemeData,
+    snackBarTheme: snackBarThemeData,
+    dialogTheme: dialogThemeData,
   );
 }

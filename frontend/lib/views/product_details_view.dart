@@ -110,7 +110,23 @@ class ProductDetailsView extends ConsumerWidget {
               child: ElevatedButton(
                 style: elevatedButtonOutlinedThemeData.style,
                 onPressed: () {
-                  cartProvider.addProduct(product);
+                  if (!cartProvider.productList.contains(product)) {
+                    cartProvider.addProduct(product);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Produto adicionado ao carrinho!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content:
+                            Text('Esse produto já foi adicionado ao carrinho!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
                 },
                 child: const Icon(
                   Icons.add_shopping_cart,
