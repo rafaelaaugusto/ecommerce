@@ -17,5 +17,6 @@ class ThemeProvider {
     snackBarTheme: snackBarThemeData,
     dialogTheme: dialogThemeData,
     bottomSheetTheme: bottomSheetThemeData,
+    dividerTheme: dividerThemeData,
   );
 }

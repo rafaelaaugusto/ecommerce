@@ -107,3 +107,5 @@ const snackBarThemeData = SnackBarThemeData(backgroundColor: primary);
 const dialogThemeData = DialogTheme(elevation: 0);
 
 const bottomSheetThemeData = BottomSheetThemeData(elevation: 0);
+
+const dividerThemeData = DividerThemeData(color: primaryContainer);
