@@ -22,38 +22,37 @@ class ShoppingCartView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Carrinho'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(Insets.l * 2),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Align(
-              alignment: Alignment.topRight,
-              child: TextButton(
-                onPressed: () {
-                  showAdaptiveDialog(
-                    context: context,
-                    builder: (context) => ActionAlertDialog(
-                      title: 'Limpar carrinho',
-                      subtitle:
-                          'Tem certeza que deseja remover todos os itens do seu carrinho?',
+      body: cartProvider.productCount > 0
+          ? Padding(
+              padding: const EdgeInsets.all(Insets.l * 2),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: TextButton(
                       onPressed: () {
-                        cartProvider.removeProducts();
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (context) => ActionAlertDialog(
+                            title: 'Limpar carrinho',
+                            subtitle:
+                                'Tem certeza que deseja remover todos os itens do seu carrinho?',
+                            onPressed: () {
+                              cartProvider.removeProducts();
+                            },
+                          ),
+                        );
                       },
+                      child: const Text(
+                        'Limpar carrinho',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: Insets.l,
+                        ),
+                      ),
                     ),
-                  );
-                },
-                child: const Text(
-                  'Limpar carrinho',
-                  style: TextStyle(
-                    color: Colors.red,
-                    fontSize: Insets.l,
                   ),
-                ),
-              ),
-            ),
-            cartProvider.productCount > 0
-                ? Expanded(
+                  Expanded(
                     child: ListView.separated(
                       itemCount: cartProvider.productCount,
                       itemBuilder: (context, index) {
@@ -67,10 +66,10 @@ class ShoppingCartView extends ConsumerWidget {
                           const SizedBox(height: Insets.xl),
                     ),
                   )
-                : _emptyData(context),
-          ],
-        ),
-      ),
+                ],
+              ),
+            )
+          : _emptyData(context),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.l * 2,
