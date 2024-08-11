@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-class RemoveProductDialog extends StatelessWidget {
+class ActionAlertDialog extends StatelessWidget {
   final Function() onPressed;
+  final String title;
+  final String subtitle;
 
-  const RemoveProductDialog({
+  const ActionAlertDialog({
     super.key,
     required this.onPressed,
+    required this.title,
+    required this.subtitle,
   });
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Remover produto'),
-      content: const Text(
-        'Tem certeza que deseja remover esse produto do carrinho?',
-      ),
+      title: Text(title),
+      content: Text(subtitle),
       actions: [
         TextButton(
           onPressed: () {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
-import 'dialogs/remove_product_dialog.dart';
+import 'dialogs/action_alert_dialog.dart';
 import 'product_image_component.dart';
 
 class ProductSelectedItem extends StatelessWidget {
@@ -70,7 +70,9 @@ class ProductSelectedItem extends StatelessWidget {
               onPressed: () {
                 showAdaptiveDialog(
                   context: context,
-                  builder: (context) => RemoveProductDialog(
+                  builder: (context) => ActionAlertDialog(
+                    title: 'Remover produto',
+                    subtitle: 'Tem certeza que deseja remover este produto?',
                     onPressed: () {
                       removeItem?.call(product);
                     },
