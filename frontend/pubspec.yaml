@@ -42,6 +42,7 @@ dependencies:
   google_fonts: ^6.2.1
   brasil_fields: ^1.14.1
   reactive_forms: ^17.0.1
+  uuid: ^4.4.2
 
 dev_dependencies:
   flutter_test:
