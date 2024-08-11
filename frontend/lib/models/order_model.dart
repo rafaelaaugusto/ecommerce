@@ -1,9 +1,9 @@
-import 'customer_model.dart';
 import 'product_model.dart';
+import 'user_model.dart';
 
 class Order {
   final String id;
-  final CustomerModel customer;
+  final UserModel customer;
   final List<ProductModel> products;
   final String total;
 

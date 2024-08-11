@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/views/checkout_view.dart';
+import 'package:frontend/views/orders_view.dart';
+import 'package:frontend/views/register_user_view.dart';
 
 import 'providers/theme_provider.dart';
 import 'theme/styles_theme.dart';
@@ -36,6 +39,9 @@ class _AppState extends ConsumerState<App> {
           '/': (context) => const HomeView(),
           '/product-details': (context) => const ProductDetailsView(),
           '/shopping-cart': (context) => const ShoppingCartView(),
+          '/register-user': (context) => const RegisterUserView(),
+          '/checkout': (context) => const CheckoutView(),
+          '/orders': (context) => const OrderViews(),
         },
       ),
     );

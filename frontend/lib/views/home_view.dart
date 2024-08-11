@@ -18,8 +18,8 @@ class HomeView extends ConsumerStatefulWidget {
 
 class _HomeViewState extends ConsumerState<HomeView> {
   ProductService apiService = ProductService();
-  List<ProductModel> products = [];
   List<ProductModel> allProducts = [];
+  List<ProductModel> products = [];
   bool hasError = false;
 
   @override
@@ -46,6 +46,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
               ),
         )
         .toList();
+
     products = productsFiltered;
     setState(() {});
   }
@@ -73,7 +74,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
           ? const Center(
               child: Text('Erro ao carregar produtos.'),
             )
-          : products.isNotEmpty
+          : allProducts.isNotBlank
               ? Padding(
                   padding: const EdgeInsets.all(Insets.l * 2),
                   child: Column(

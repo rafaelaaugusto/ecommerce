@@ -1,13 +1,13 @@
 import 'adress_model.dart';
 
-class CustomerModel {
+class UserModel {
   final String id;
   final String name;
   final String email;
   final AdressModel adress;
   final String? phone;
 
-  CustomerModel(
+  UserModel(
     this.id, {
     required this.name,
     required this.email,
