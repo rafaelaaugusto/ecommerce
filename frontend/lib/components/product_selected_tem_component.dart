@@ -23,8 +23,8 @@ class ProductSelectedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(
-        vertical: Insets.xl,
-        horizontal: Insets.m,
+        vertical: Insets.m,
+        horizontal: Insets.xl,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(Insets.m),

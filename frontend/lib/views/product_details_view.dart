@@ -154,12 +154,11 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
 
                   checkoutItensProvider.addProduct(product);
                   if (currentUserProvider.currentUser != null) {
-                    Navigator.popAndPushNamed(context, '/checkout')
-                        .then((value) => setState(
-                              () {
-                                isLoading = false;
-                              },
-                            ));
+                    Navigator.pushNamed(context, '/checkout').then(
+                      (value) => setState(() {
+                        isLoading = false;
+                      }),
+                    );
                   } else {
                     Navigator.pushNamed(
                       context,
