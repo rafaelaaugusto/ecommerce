@@ -3,22 +3,15 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../components/dialogs/remove_product_dialog.dart';
-import '../components/product_image_component.dart';
-import '../functions/helper_functions.dart';
+import '../components/product_selected_tem_component.dart';
 import '../providers/shopping_cart_provider.dart';
 import '../providers/user_provider.dart';
 
-class ShoppingCartView extends ConsumerStatefulWidget {
+class ShoppingCartView extends ConsumerWidget {
   const ShoppingCartView({super.key});
 
   @override
-  ConsumerState<ShoppingCartView> createState() => _ShoppingCartViewState();
-}
-
-class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final cartProvider = ref.watch(shoppingCartProvider);
     final currentUserProvider = ref.watch(userProvider);
 
@@ -32,76 +25,15 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
               itemCount: cartProvider.productCount,
               itemBuilder: (context, index) {
                 final product = cartProvider.productList[index];
-                return ListTile(
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: Insets.xl,
-                    horizontal: Insets.m,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(Insets.m),
-                    side: BorderSide(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    ),
-                  ),
-                  title: Text(
-                    product.name,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  subtitle: Row(
-                    children: [
-                      Text(
-                        UtilBrasilFields.obterReal(
-                          double.parse(product.price),
-                          moeda: true,
-                        ),
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(fontSize: Insets.xl),
-                      ),
-                      const SizedBox(width: Insets.m),
-                      if (product.hasDiscount &&
-                          product.discountValue.isNotBlank)
-                        Badge(
-                          backgroundColor: Colors.red.shade200,
-                          label: Text(
-                            getPercentualValue(product.discountValue!),
-                          ),
-                        ),
-                    ],
-                  ),
-                  leading: ProductImage(
-                    itemId: product.id,
-                  ),
-                  trailing: IconButton(
-                    icon: const Icon(
-                      Icons.close,
-                    ),
-                    color: Colors.red,
-                    onPressed: () {
-                      showAdaptiveDialog(
-                        context: context,
-                        builder: (context) => RemoveProductDialog(
-                          onPressed: () {
-                            cartProvider.removeProduct(product);
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/product-details',
-                      arguments: product,
-                    );
-                  },
+                return ProductSelectedItem(
+                  product: product,
+                  removeItem: cartProvider.removeProduct,
                 );
               },
               separatorBuilder: (context, index) =>
                   const SizedBox(height: Insets.xl),
             )
-          : emptyData(),
+          : _emptyData(context),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.l * 2,
@@ -121,9 +53,10 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
               onPressed: cartProvider.productCount > 0
                   ? () {
                       if (currentUserProvider.currentUser != null) {
-                        Navigator.pushNamed(
+                        Navigator.popAndPushNamed(
                           context,
                           '/checkout',
+                          arguments: cartProvider.productList,
                         );
                       } else {
                         Navigator.pushNamed(
@@ -133,7 +66,7 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
                       }
                     }
                   : null,
-              child: const Text('Continuar'),
+              child: const Text('Ir para pagamento'),
             ),
           ],
         ),
@@ -141,7 +74,7 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
     );
   }
 
-  Widget emptyData() {
+  Widget _emptyData(BuildContext context) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
