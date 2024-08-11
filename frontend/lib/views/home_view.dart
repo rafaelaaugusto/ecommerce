@@ -58,6 +58,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('ShopWorld'),
+        automaticallyImplyLeading: false,
         actions: [
           ShoppingCartIcon(
             onPressed: () {
