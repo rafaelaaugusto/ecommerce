@@ -11,6 +11,8 @@ class CheckoutProvider extends ChangeNotifier {
   final List<ProductModel> products = [];
 
   int get productCount => products.length;
+  double get totalValue => products.fold(
+      0, (previousValue, prod) => double.parse(prod.price) + previousValue);
 
   void addProduct(ProductModel product) {
     removeProducts();
