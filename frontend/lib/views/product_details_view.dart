@@ -7,6 +7,7 @@ import '../components/product_image_component.dart';
 import '../components/shopping_cart_icon_component.dart';
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
+import '../providers/checkout_provider.dart';
 import '../providers/shopping_cart_provider.dart';
 import '../providers/user_provider.dart';
 import '../theme/styles_theme.dart';
@@ -24,6 +25,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
   @override
   Widget build(BuildContext context) {
     final cartProvider = ref.watch(shoppingCartProvider);
+    final checkoutItensProvider = ref.watch(checkoutProvider);
     final currentUserProvider = ref.watch(userProvider);
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
@@ -150,21 +152,23 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
                     isLoading = true;
                   });
 
+                  checkoutItensProvider.addProduct(product);
                   if (currentUserProvider.currentUser != null) {
-                    Navigator.popAndPushNamed(
-                      context,
-                      '/checkout',
-                      arguments: product,
-                    ).then((value) => setState(() {
-                          isLoading = false;
-                        }));
+                    Navigator.popAndPushNamed(context, '/checkout')
+                        .then((value) => setState(
+                              () {
+                                isLoading = false;
+                              },
+                            ));
                   } else {
                     Navigator.pushNamed(
                       context,
                       '/register-user',
-                    ).then((value) => setState(() {
-                          isLoading = false;
-                        }));
+                    ).then(
+                      (value) => setState(() {
+                        isLoading = false;
+                      }),
+                    );
                   }
                 },
                 icon: isLoading
