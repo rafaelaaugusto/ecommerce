@@ -2,20 +2,29 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/theme/styles_theme.dart';
 
 import '../components/product_image_component.dart';
 import '../components/shopping_cart_icon_component.dart';
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
 import '../providers/shopping_cart_provider.dart';
+import '../providers/user_provider.dart';
+import '../theme/styles_theme.dart';
 
-class ProductDetailsView extends ConsumerWidget {
+class ProductDetailsView extends ConsumerStatefulWidget {
   const ProductDetailsView({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ProductDetailsView> createState() => _ProductDetailsViewState();
+}
+
+class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
     final cartProvider = ref.watch(shoppingCartProvider);
+    final currentUserProvider = ref.watch(userProvider);
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
 
@@ -135,11 +144,40 @@ class ProductDetailsView extends ConsumerWidget {
             ),
             const SizedBox(width: Insets.m),
             Expanded(
-              child: ElevatedButton(
+              child: ElevatedButton.icon(
                 onPressed: () {
-                  cartProvider.addProduct(product);
+                  setState(() {
+                    isLoading = true;
+                  });
+
+                  if (currentUserProvider.currentUser != null) {
+                    Navigator.popAndPushNamed(
+                      context,
+                      '/checkout',
+                      arguments: product,
+                    ).then((value) => setState(() {
+                          isLoading = false;
+                        }));
+                  } else {
+                    Navigator.pushNamed(
+                      context,
+                      '/register-user',
+                    ).then((value) => setState(() {
+                          isLoading = false;
+                        }));
+                  }
                 },
-                child: const Text('Comprar agora'),
+                icon: isLoading
+                    ? SizedBox(
+                        height: Insets.l,
+                        width: Insets.l,
+                        child: CircularProgressIndicator(
+                          color: Theme.of(context).colorScheme.onPrimary,
+                          strokeWidth: Insets.xxs,
+                        ),
+                      )
+                    : const SizedBox(),
+                label: const Text('Comprar agora'),
               ),
             ),
           ],

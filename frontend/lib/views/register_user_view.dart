@@ -1,17 +1,22 @@
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../components/forms/user_form.dart';
+import '../models/user_model.dart';
+import '../providers/user_provider.dart';
 
-class RegisterUserView extends StatefulWidget {
+class RegisterUserView extends ConsumerStatefulWidget {
   const RegisterUserView({super.key});
 
   @override
-  State<RegisterUserView> createState() => _RegisterUserViewState();
+  ConsumerState<RegisterUserView> createState() => _RegisterUserViewState();
 }
 
-class _RegisterUserViewState extends State<RegisterUserView> {
+class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
+  bool isSaving = false;
+
   FormGroup form = FormGroup({
     'name': FormControl<String>(validators: [
       Validators.required,
@@ -40,6 +45,8 @@ class _RegisterUserViewState extends State<RegisterUserView> {
 
   @override
   Widget build(BuildContext context) {
+    final currentUserProvider = ref.watch(userProvider);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dados pessoais'),
@@ -68,9 +75,37 @@ class _RegisterUserViewState extends State<RegisterUserView> {
         ),
         child: SizedBox(
           width: double.infinity,
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Salvar dados'),
+          child: ElevatedButton.icon(
+            onPressed: () {
+              form.markAllAsTouched();
+
+              if (form.valid) {
+                setState(() {
+                  isSaving = true;
+                });
+
+                final user = UserModel.fromJson(form.value);
+                currentUserProvider.setUser(user);
+
+                if (context.mounted) {
+                  Navigator.popAndPushNamed(
+                    context,
+                    '/checkout',
+                  );
+                }
+              }
+            },
+            icon: isSaving
+                ? SizedBox(
+                    height: Insets.l,
+                    width: Insets.l,
+                    child: CircularProgressIndicator(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                      strokeWidth: Insets.xxs,
+                    ),
+                  )
+                : const SizedBox(),
+            label: const Text('Salvar dados'),
           ),
         ),
       ),
