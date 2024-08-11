@@ -49,7 +49,7 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dados pessoais'),
+        title: const Text('Dados para entrega'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -58,12 +58,12 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                'Por gentileza, informe seus dados pessoais para relizar a compra.',
+                'Por gentileza, informe seus dados para realizar a compra.',
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: Insets.l),
               UserForm(form: form),
-              const SizedBox(height: 70)
+              const SizedBox(height: Insets.l * 7)
             ],
           ),
         ),
