@@ -87,7 +87,9 @@ class _HomeViewState extends ConsumerState<HomeView> {
                   ),
                 )
               : const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    strokeWidth: Insets.xxs,
+                  ),
                 ),
     );
   }

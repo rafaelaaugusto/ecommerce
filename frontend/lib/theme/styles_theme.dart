@@ -21,7 +21,7 @@ final latoTextTheme = GoogleFonts.latoTextTheme(
 
 final textTheme = latoTextTheme.copyWith(
   titleLarge: GoogleFonts.merriweather(
-    color: secondary,
+    color: primary,
     fontSize: Insets.xxl,
   ),
   labelSmall: GoogleFonts.lato(
@@ -29,7 +29,7 @@ final textTheme = latoTextTheme.copyWith(
     fontSize: Insets.xl,
   ),
   titleSmall: GoogleFonts.lato(
-    color: secondary,
+    color: primary,
     fontWeight: FontWeight.bold,
   ),
 );
@@ -48,6 +48,7 @@ const inputDecorationTheme = InputDecorationTheme(
     color: onSurface,
     fontWeight: FontWeight.normal,
   ),
+  floatingLabelStyle: TextStyle(color: onSurface),
   border: borderStyle,
   focusedBorder: borderStyle,
   enabledBorder: borderStyle,
@@ -56,7 +57,7 @@ const inputDecorationTheme = InputDecorationTheme(
 
 final appBarTheme = AppBarTheme(
   titleTextStyle: GoogleFonts.lato(
-    color: secondary,
+    color: primary,
     fontSize: Insets.xxl,
   ),
   elevation: 0,
@@ -64,16 +65,16 @@ final appBarTheme = AppBarTheme(
   actionsIconTheme: iconThemeData,
   centerTitle: true,
   iconTheme: const IconThemeData(
-    color: secondary,
+    color: primary,
   ),
 );
 
-const iconThemeData = IconThemeData(color: primary);
+const iconThemeData = IconThemeData(color: secondary);
 
 final elevatedButtonThemeData = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
     elevation: 0,
-    backgroundColor: primary,
+    backgroundColor: secondary,
     foregroundColor: onPrimary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(Insets.m),
@@ -89,9 +90,9 @@ final elevatedButtonOutlinedThemeData = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(
     elevation: 0,
     backgroundColor: onPrimary,
-    foregroundColor: primary,
+    foregroundColor: secondary,
     shape: RoundedRectangleBorder(
-      side: const BorderSide(color: primary),
+      side: const BorderSide(color: secondary),
       borderRadius: BorderRadius.circular(Insets.m),
     ),
     padding: const EdgeInsets.all(14),
@@ -101,7 +102,7 @@ final elevatedButtonOutlinedThemeData = ElevatedButtonThemeData(
   ),
 );
 
-const snackBarThemeData = SnackBarThemeData(backgroundColor: secondary);
+const snackBarThemeData = SnackBarThemeData(backgroundColor: primary);
 
 const dialogThemeData = DialogTheme(elevation: 0);
 

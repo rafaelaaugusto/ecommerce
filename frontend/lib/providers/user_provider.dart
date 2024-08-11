@@ -8,7 +8,7 @@ final userProvider = ChangeNotifierProvider<UserProvider>(
 );
 
 class UserProvider extends ChangeNotifier {
-  late final UserModel? user;
+  UserModel? user;
 
   UserModel? get currentUser => user;
 

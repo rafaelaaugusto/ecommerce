@@ -31,28 +31,29 @@ class _ShoppingCartIconState extends State<ShoppingCartIcon> {
             child: Icon(Icons.shopping_cart),
           ),
         ),
-        Positioned(
-          left: 25,
-          bottom: 30,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.secondary,
-              borderRadius: BorderRadius.circular(
-                Insets.xxl,
+        if (widget.productCount > 0)
+          Positioned(
+            left: 25,
+            bottom: 30,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(
+                  Insets.xxl,
+                ),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Insets.xs),
-              child: Text(
-                widget.productCount.toString(),
-                style: const TextStyle(
-                  fontSize: Insets.l,
-                  fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Insets.xs),
+                child: Text(
+                  widget.productCount.toString(),
+                  style: const TextStyle(
+                    fontSize: Insets.l,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
       ],
     );
   }

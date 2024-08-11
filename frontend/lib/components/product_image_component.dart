@@ -24,7 +24,9 @@ class ProductImage extends StatelessWidget {
         height: double.parse(heigth),
         imageUrl: 'https://picsum.photos/$width/$heigth/?random=$itemId',
         placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            strokeWidth: Insets.xxs,
+          ),
         ),
         errorWidget: (context, url, error) =>
             Image.asset('images/notfound.jpg'),

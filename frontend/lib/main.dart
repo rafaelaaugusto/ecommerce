@@ -41,7 +41,7 @@ class _AppState extends ConsumerState<App> {
           '/shopping-cart': (context) => const ShoppingCartView(),
           '/register-user': (context) => const RegisterUserView(),
           '/checkout': (context) => const CheckoutView(),
-          '/orders': (context) => const OrderViews(),
+          '/orders': (context) => const OrdersViews(),
         },
       ),
     );

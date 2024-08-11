@@ -7,6 +7,7 @@ import '../components/dialogs/remove_product_dialog.dart';
 import '../components/product_image_component.dart';
 import '../functions/helper_functions.dart';
 import '../providers/shopping_cart_provider.dart';
+import '../providers/user_provider.dart';
 
 class ShoppingCartView extends ConsumerStatefulWidget {
   const ShoppingCartView({super.key});
@@ -19,6 +20,7 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
   @override
   Widget build(BuildContext context) {
     final cartProvider = ref.watch(shoppingCartProvider);
+    final currentUserProvider = ref.watch(userProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -116,7 +118,21 @@ class _ShoppingCartViewState extends ConsumerState<ShoppingCartView> {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ElevatedButton(
-              onPressed: cartProvider.productCount > 0 ? () {} : null,
+              onPressed: cartProvider.productCount > 0
+                  ? () {
+                      if (currentUserProvider.currentUser != null) {
+                        Navigator.pushNamed(
+                          context,
+                          '/checkout',
+                        );
+                      } else {
+                        Navigator.pushNamed(
+                          context,
+                          '/register-user',
+                        );
+                      }
+                    }
+                  : null,
               child: const Text('Continuar'),
             ),
           ],
