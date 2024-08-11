@@ -12,4 +12,14 @@ class AdressModel {
     required this.state,
     required this.extra,
   });
+
+  factory AdressModel.fromJson(Map<String, dynamic> data) {
+    return AdressModel(
+      street: data['street'],
+      city: data['city'],
+      zipcode: data['zipcode'],
+      state: data['state'],
+      extra: data['extra'],
+    );
+  }
 }
