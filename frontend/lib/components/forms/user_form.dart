@@ -25,6 +25,7 @@ class UserForm extends StatelessWidget {
             validationMessages: {
               ValidationMessage.required: (error) => 'Informe seu nome'
             },
+            textCapitalization: TextCapitalization.words,
           ),
           const SizedBox(height: Insets.xl),
           ReactiveTextField(
@@ -43,6 +44,7 @@ class UserForm extends StatelessWidget {
             decoration: const InputDecoration(
               labelText: 'Celular',
             ),
+            keyboardType: TextInputType.phone,
           ),
           const SizedBox(height: Insets.xl),
           const Text('Endereço de entrega'),
@@ -55,6 +57,7 @@ class UserForm extends StatelessWidget {
             validationMessages: {
               ValidationMessage.required: (error) => 'Informe a rua'
             },
+            textCapitalization: TextCapitalization.words,
           ),
           const SizedBox(height: Insets.xl),
           ReactiveTextField(
@@ -65,6 +68,7 @@ class UserForm extends StatelessWidget {
             validationMessages: {
               ValidationMessage.required: (error) => 'Informe a cidade'
             },
+            textCapitalization: TextCapitalization.words,
           ),
           const SizedBox(height: Insets.xl),
           Row(
@@ -78,6 +82,7 @@ class UserForm extends StatelessWidget {
                   validationMessages: {
                     ValidationMessage.required: (error) => 'Informe o estado'
                   },
+                  textCapitalization: TextCapitalization.words,
                 ),
               ),
               const SizedBox(width: Insets.s),
@@ -90,6 +95,7 @@ class UserForm extends StatelessWidget {
                   validationMessages: {
                     ValidationMessage.required: (error) => 'Informe o CEP'
                   },
+                  keyboardType: TextInputType.number,
                 ),
               ),
             ],
@@ -100,6 +106,7 @@ class UserForm extends StatelessWidget {
             decoration: const InputDecoration(
               labelText: 'Complemento',
             ),
+            textCapitalization: TextCapitalization.words,
           ),
         ],
       ),
