@@ -24,4 +24,9 @@ class ShoppingCartProvider extends ChangeNotifier {
     products.remove(product);
     notifyListeners();
   }
+
+  void removeProducts() {
+    products.clear();
+    notifyListeners();
+  }
 }
