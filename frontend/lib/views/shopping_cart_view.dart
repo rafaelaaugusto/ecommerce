@@ -47,7 +47,7 @@ class ShoppingCartView extends ConsumerWidget {
                         'Limpar carrinho',
                         style: TextStyle(
                           color: Colors.red,
-                          fontSize: Insets.l,
+                          fontSize: Insets.xl,
                         ),
                       ),
                     ),
@@ -95,7 +95,7 @@ class ShoppingCartView extends ConsumerWidget {
                           '/checkout',
                         );
                       } else {
-                        Navigator.popAndPushNamed(
+                        Navigator.pushNamed(
                           context,
                           '/register-user',
                         );
