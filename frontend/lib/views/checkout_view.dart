@@ -22,14 +22,29 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
     final checkoutItensProvider = ref.watch(checkoutProvider);
     final user = ref.watch(userProvider).currentUser!;
 
+    void onWillPop() {
+      showAdaptiveDialog(
+        context: context,
+        builder: (context) => ActionAlertDialog(
+          title: 'Sair do pagamento',
+          subtitle:
+              'Ao sair do pagamento seu pedido será perdido, deseja sair mesmo assim?',
+          onPressed: () => Future.delayed(
+            Duration.zero,
+            () {
+              checkoutItensProvider.removeProducts();
+              Navigator.popAndPushNamed(context, '/');
+            },
+          ),
+        ),
+      );
+    }
+
     return PopScope(
       canPop: false,
       onPopInvoked: (didPop) {
         if (didPop) return;
-        onWillPop(() {
-          checkoutItensProvider.removeProducts();
-          Navigator.popAndPushNamed(context, '/home');
-        });
+        onWillPop();
       },
       child: Scaffold(
         appBar: AppBar(
@@ -121,23 +136,11 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text('Pagar'),
+                child: const Text('Pagar agora'),
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  void onWillPop(Function onPressed) {
-    showAdaptiveDialog(
-      context: context,
-      builder: (context) => ActionAlertDialog(
-        title: 'Sair do pagamento',
-        subtitle:
-            'Ao sair do pagamento seu pedido será perdido, deseja sair mesmo assim?',
-        onPressed: onPressed(),
       ),
     );
   }
