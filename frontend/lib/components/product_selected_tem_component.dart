@@ -65,6 +65,7 @@ class ProductSelectedItem extends StatelessWidget {
           ? IconButton(
               icon: const Icon(
                 Icons.close,
+                size: 18,
               ),
               color: Colors.red,
               onPressed: () {
