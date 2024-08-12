@@ -149,6 +149,8 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                     user: user,
                   );
                   orderService.createOrder(order.toMap());
+
+                  Navigator.popAndPushNamed(context, '/sucessful-purchase');
                 },
                 child: const Text('Pagar agora'),
               ),
