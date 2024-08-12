@@ -3,11 +3,14 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
+import 'package:uuid/uuid.dart';
 
 import '../components/dialogs/action_alert_dialog.dart';
 import '../components/product_selected_tem_component.dart';
+import '../models/order_model.dart';
 import '../providers/checkout_provider.dart';
 import '../providers/user_provider.dart';
+import '../services/order_service.dart';
 
 class CheckoutView extends ConsumerStatefulWidget {
   const CheckoutView({super.key});
@@ -17,6 +20,8 @@ class CheckoutView extends ConsumerStatefulWidget {
 }
 
 class _CheckoutViewState extends ConsumerState<CheckoutView> {
+  OrderService orderService = OrderService();
+
   @override
   Widget build(BuildContext context) {
     final checkoutItensProvider = ref.watch(checkoutProvider);
@@ -135,7 +140,15 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  final order = OrderModel(
+                    const Uuid().v4(),
+                    products: checkoutItensProvider.products,
+                    total: checkoutItensProvider.totalValue.toString(),
+                    user: user,
+                  );
+                  orderService.createOrder(order.toMap());
+                },
                 child: const Text('Pagar agora'),
               ),
             ],

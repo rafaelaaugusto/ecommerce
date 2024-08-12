@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/views/checkout_view.dart';
-import 'package:frontend/views/orders_view.dart';
-import 'package:frontend/views/register_user_view.dart';
 
 import 'providers/theme_provider.dart';
 import 'theme/styles_theme.dart';
-import 'views/home_view.dart';
+import 'views/checkout_view.dart';
 import 'views/product_details_view.dart';
+import 'views/register_user_view.dart';
 import 'views/shopping_cart_view.dart';
+import 'views/tabs_view.dart';
 
 void main() {
   runApp(
@@ -36,12 +35,11 @@ class _AppState extends ConsumerState<App> {
         theme: defaultProvider.theme,
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => const HomeView(),
+          '/': (context) => const TabsView(),
           '/product-details': (context) => const ProductDetailsView(),
           '/shopping-cart': (context) => const ShoppingCartView(),
           '/register-user': (context) => const RegisterUserView(),
           '/checkout': (context) => const CheckoutView(),
-          '/orders': (context) => const OrdersViews(),
         },
       ),
     );
