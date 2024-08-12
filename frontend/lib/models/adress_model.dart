@@ -22,4 +22,14 @@ class AdressModel {
       extra: data['extra'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'street': street,
+      'city': city,
+      'zipcode': zipcode,
+      'state': state,
+      'extra': extra,
+    };
+  }
 }
