@@ -18,5 +18,6 @@ class ThemeProvider {
     dialogTheme: dialogThemeData,
     bottomSheetTheme: bottomSheetThemeData,
     dividerTheme: dividerThemeData,
+    bottomNavigationBarTheme: bottomNavigationBarThemeData,
   );
 }

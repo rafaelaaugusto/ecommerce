@@ -109,3 +109,10 @@ const dialogThemeData = DialogTheme(elevation: 0);
 const bottomSheetThemeData = BottomSheetThemeData(elevation: 0);
 
 const dividerThemeData = DividerThemeData(color: primaryContainer);
+
+const bottomNavigationBarThemeData = BottomNavigationBarThemeData(
+  selectedIconTheme: iconThemeData,
+  selectedLabelStyle: TextStyle(
+    color: secondary,
+  ),
+);
