@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import '../models/order_model.dart';
+
 class OrderService {
-  final String apiUrl = 'http://192.168.15.6:3000/api/orders';
+  final String apiUrl = 'http://192.168.1.8:3000/api/orders';
 
   Future<bool> createOrder(Map<String, dynamic> orderData) async {
     final response = await http.post(
@@ -16,6 +18,18 @@ class OrderService {
       return true;
     } else {
       throw Exception('Failed to create order');
+    }
+  }
+
+  Future<List<OrderModel>> fetchOrders() async {
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      List<dynamic> data = json.decode(response.body);
+
+      return data.map((order) => OrderModel.fromJson(order)).toList();
+    } else {
+      throw Exception('Failed to load orders');
     }
   }
 }
