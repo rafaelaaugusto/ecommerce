@@ -37,4 +37,12 @@ class ProductModel {
       details: data['details'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'price': price,
+    };
+  }
 }
