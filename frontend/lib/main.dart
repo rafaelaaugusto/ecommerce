@@ -4,9 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'providers/theme_provider.dart';
 import 'theme/styles_theme.dart';
 import 'views/checkout_view.dart';
+import 'views/order_details_view.dart';
 import 'views/product_details_view.dart';
 import 'views/register_user_view.dart';
 import 'views/shopping_cart_view.dart';
+import 'views/successful_purchase_view.dart';
 import 'views/tabs_view.dart';
 
 void main() {
@@ -40,6 +42,8 @@ class _AppState extends ConsumerState<App> {
           '/shopping-cart': (context) => const ShoppingCartView(),
           '/register-user': (context) => const RegisterUserView(),
           '/checkout': (context) => const CheckoutView(),
+          '/sucessful-purchase': (context) => const SuccessfulPurchaseView(),
+          '/order-details': (context) => const OrderDetailsView(),
         },
       ),
     );
