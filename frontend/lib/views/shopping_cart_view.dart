@@ -65,7 +65,8 @@ class ShoppingCartView extends ConsumerWidget {
                       separatorBuilder: (context, index) =>
                           const SizedBox(height: Insets.xl),
                     ),
-                  )
+                  ),
+                  const SizedBox(height: Insets.l * 7),
                 ],
               ),
             )

@@ -120,6 +120,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                   separatorBuilder: (context, index) =>
                       const SizedBox(height: Insets.xl),
                 ),
+                const SizedBox(height: Insets.l * 7),
               ],
             ),
           ),
