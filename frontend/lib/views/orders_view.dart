@@ -47,18 +47,27 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
               child: Text('Erro ao carregar pedidos.'),
             )
           : orders.isNotBlank
-              ? Column(
-                  children: [
-                    const Text('Minhas compras'),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: orders.length,
-                        itemBuilder: (context, index) => OrderItem(
-                          order: orders[index],
+              ? Padding(
+                  padding: const EdgeInsets.all(Insets.l * 2),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Minhas compras',
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: Insets.xxl),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: orders.length,
+                          itemBuilder: (context, index) => OrderItem(
+                            order: orders[index],
+                          ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: Insets.xl),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 )
               : Center(
                   child: user != null
