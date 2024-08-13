@@ -27,8 +27,8 @@ class ProductModel {
     return ProductModel(
       id: data['id'],
       name: data['name'],
-      description: data['description'],
       price: data['price'],
+      description: data['description'],
       hasDiscount: data['hasDiscount'] ?? false,
       discountValue: data['discountValue'],
       gallery: List<String>.from(data['gallery'] ?? []),
@@ -43,6 +43,13 @@ class ProductModel {
       'id': id,
       'name': name,
       'price': price,
+      'description': description,
+      'hasDiscount': hasDiscount,
+      'discountValue': discountValue,
+      'gallery': gallery,
+      'material': material,
+      'department': department,
+      'details': details,
     };
   }
 }

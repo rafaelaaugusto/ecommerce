@@ -143,7 +143,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
               ElevatedButton(
                 onPressed: () {
                   final order = OrderModel(
-                    const Uuid().v4(),
+                    id: const Uuid().v4(),
                     products: checkoutItensProvider.products,
                     total: checkoutItensProvider.totalValue.toString(),
                     user: user,
