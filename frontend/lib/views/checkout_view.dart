@@ -24,9 +24,9 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    final checkoutItensProvider = ref.watch(checkoutProvider);
-    final cartProvider = ref.watch(shoppingCartProvider);
-    final user = ref.watch(userProvider).currentUser!;
+    final checkout = ref.watch(checkoutProvider);
+    final shoppingCart = ref.watch(shoppingCartProvider);
+    final currentUser = ref.watch(userProvider).currentUser!;
 
     void onWillPop() {
       showAdaptiveDialog(
@@ -38,7 +38,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
           onPressed: () => Future.delayed(
             Duration.zero,
             () {
-              checkoutItensProvider.removeProducts();
+              checkout.removeProducts();
               Navigator.popAndPushNamed(context, '/');
             },
           ),
@@ -57,8 +57,8 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
           title: const Text('Pagamento'),
         ),
         body: OrderDetails(
-          user: user,
-          products: checkoutItensProvider.products,
+          user: currentUser,
+          products: checkout.products,
         ),
         bottomSheet: Padding(
           padding: const EdgeInsets.symmetric(
@@ -70,7 +70,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
             children: [
               Text(
                 'Total: ${UtilBrasilFields.obterReal(
-                  checkoutItensProvider.totalValue,
+                  checkout.totalValue,
                   moeda: true,
                 )}',
                 style: Theme.of(context).textTheme.titleLarge,
@@ -79,13 +79,13 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                 onPressed: () {
                   final order = OrderModel(
                     id: const Uuid().v4(),
-                    products: checkoutItensProvider.products,
-                    total: checkoutItensProvider.totalValue.toString(),
-                    user: user,
+                    products: checkout.products,
+                    total: checkout.totalValue.toString(),
+                    user: currentUser,
                   );
                   orderService.createOrder(order.toMap());
 
-                  cartProvider.removeProducts(checkoutItensProvider.products);
+                  shoppingCart.removeProducts(checkout.products);
 
                   Navigator.popAndPushNamed(
                     context,

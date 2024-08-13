@@ -31,7 +31,7 @@ class _TabsViewState extends ConsumerState<TabsView> {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = ref.watch(shoppingCartProvider);
+    final shoppingCart = ref.watch(shoppingCartProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +45,7 @@ class _TabsViewState extends ConsumerState<TabsView> {
                 '/shopping-cart',
               );
             },
-            productCount: cartProvider.productCount,
+            productCount: shoppingCart.productCount,
           ),
         ],
       ),

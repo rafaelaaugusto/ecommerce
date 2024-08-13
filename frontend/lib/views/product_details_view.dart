@@ -24,9 +24,9 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final cartProvider = ref.watch(shoppingCartProvider);
-    final checkoutItensProvider = ref.watch(checkoutProvider);
-    final currentUserProvider = ref.watch(userProvider);
+    final shoppingCart = ref.watch(shoppingCartProvider);
+    final checkout = ref.watch(checkoutProvider);
+    final currentUser = ref.watch(userProvider).currentUser;
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
 
@@ -41,7 +41,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
                 '/shopping-cart',
               );
             },
-            productCount: cartProvider.productCount,
+            productCount: shoppingCart.productCount,
           ),
         ],
       ),
@@ -121,8 +121,8 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
               child: ElevatedButton(
                 style: elevatedButtonOutlinedThemeData.style,
                 onPressed: () {
-                  if (!cartProvider.productList.contains(product)) {
-                    cartProvider.addProduct(product);
+                  if (!shoppingCart.products.contains(product)) {
+                    shoppingCart.addProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Produto adicionado ao carrinho!'),
@@ -152,8 +152,8 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
                     isLoading = true;
                   });
 
-                  checkoutItensProvider.addProduct(product);
-                  if (currentUserProvider.currentUser != null) {
+                  checkout.addProduct(product);
+                  if (currentUser != null) {
                     Navigator.pushNamed(context, '/checkout').then(
                       (value) => setState(() {
                         isLoading = false;

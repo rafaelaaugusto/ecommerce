@@ -2,10 +2,10 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/components/empty_data_component.dart';
 
 import '../components/dialogs/action_alert_dialog.dart';
-import '../components/product_selected_tem_component.dart';
+import '../components/empty_data_component.dart';
+import '../components/product_selected_item_component.dart';
 import '../providers/checkout_provider.dart';
 import '../providers/shopping_cart_provider.dart';
 import '../providers/user_provider.dart';
@@ -15,15 +15,15 @@ class ShoppingCartView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cartProvider = ref.watch(shoppingCartProvider);
+    final shoppingCart = ref.watch(shoppingCartProvider);
     final currentUserProvider = ref.watch(userProvider);
-    final checkoutItensProvider = ref.watch(checkoutProvider);
+    final checkout = ref.watch(checkoutProvider);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Carrinho'),
       ),
-      body: cartProvider.productCount > 0
+      body: shoppingCart.products.isNotBlank
           ? Padding(
               padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
               child: Column(
@@ -39,7 +39,7 @@ class ShoppingCartView extends ConsumerWidget {
                             subtitle:
                                 'Tem certeza que deseja remover todos os itens do seu carrinho?',
                             onPressed: () {
-                              cartProvider.removeAllProducts();
+                              shoppingCart.removeAllProducts();
                             },
                           ),
                         );
@@ -55,12 +55,12 @@ class ShoppingCartView extends ConsumerWidget {
                   ),
                   Expanded(
                     child: ListView.separated(
-                      itemCount: cartProvider.productCount,
+                      itemCount: shoppingCart.productCount,
                       itemBuilder: (context, index) {
-                        final product = cartProvider.productList[index];
+                        final product = shoppingCart.products[index];
                         return ProductSelectedItem(
                           product: product,
-                          removeItem: cartProvider.removeProduct,
+                          removeItem: shoppingCart.removeProduct,
                         );
                       },
                       separatorBuilder: (context, index) =>
@@ -84,15 +84,15 @@ class ShoppingCartView extends ConsumerWidget {
           children: [
             Text(
               'Total: ${UtilBrasilFields.obterReal(
-                cartProvider.totalValue,
+                shoppingCart.totalValue,
                 moeda: true,
               )}',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ElevatedButton(
-              onPressed: cartProvider.productCount > 0
+              onPressed: shoppingCart.productCount > 0
                   ? () {
-                      checkoutItensProvider.addProducts(cartProvider.products);
+                      checkout.addProducts(shoppingCart.products);
                       if (currentUserProvider.currentUser != null) {
                         Navigator.pushNamed(
                           context,

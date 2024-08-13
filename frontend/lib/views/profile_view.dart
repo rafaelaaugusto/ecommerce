@@ -15,7 +15,7 @@ class ProfileView extends ConsumerStatefulWidget {
 class _ProfileViewState extends ConsumerState<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProvider).currentUser;
+    final currentUser = ref.watch(userProvider).currentUser;
 
     return Padding(
       padding: const EdgeInsets.all(Insets.l * 2),
@@ -34,25 +34,26 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                 size: 70,
               ),
             ),
-            if (user != null)
+            if (currentUser != null)
               Text(
-                user.name,
+                currentUser.name,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
-            user != null
+            currentUser != null
                 ? Column(
                     children: [
                       const SizedBox(
                         height: Insets.l * 3,
                       ),
-                      buildInfoTile(context, user.email, FontAwesome.envelope),
-                      if (user.phone.isNotBlank)
-                        buildInfoTile(context, user.phone!, Icons.phone),
+                      buildInfoTile(
+                          context, currentUser.email, FontAwesome.envelope),
+                      if (currentUser.phone.isNotBlank)
+                        buildInfoTile(context, currentUser.phone!, Icons.phone),
                       buildInfoTile(
                         context,
-                        user.adress.street,
+                        currentUser.adress.street,
                         FontAwesome.location_dot_solid,
                       ),
                     ],
