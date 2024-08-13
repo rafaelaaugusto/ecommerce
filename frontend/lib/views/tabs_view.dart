@@ -5,7 +5,7 @@ import '../components/shopping_cart_icon_component.dart';
 import '../providers/shopping_cart_provider.dart';
 import 'home_view.dart';
 import 'orders_view.dart';
-import 'shopping_cart_view.dart';
+import 'profile_view.dart';
 
 class TabsView extends ConsumerStatefulWidget {
   const TabsView({super.key});
@@ -20,7 +20,7 @@ class _TabsViewState extends ConsumerState<TabsView> {
   static const List<Widget> _pages = <Widget>[
     HomeView(),
     OrdersView(),
-    ShoppingCartView(),
+    ProfileView(),
   ];
 
   void _onItemTapped(int index) {
