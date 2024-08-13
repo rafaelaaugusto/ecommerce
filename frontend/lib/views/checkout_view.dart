@@ -9,6 +9,7 @@ import '../components/dialogs/action_alert_dialog.dart';
 import '../components/product_selected_tem_component.dart';
 import '../models/order_model.dart';
 import '../providers/checkout_provider.dart';
+import '../providers/shopping_cart_provider.dart';
 import '../providers/user_provider.dart';
 import '../services/order_service.dart';
 
@@ -25,6 +26,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
   @override
   Widget build(BuildContext context) {
     final checkoutItensProvider = ref.watch(checkoutProvider);
+    final cartProvider = ref.watch(shoppingCartProvider);
     final user = ref.watch(userProvider).currentUser!;
 
     void onWillPop() {
@@ -149,6 +151,8 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                     user: user,
                   );
                   orderService.createOrder(order.toMap());
+
+                  cartProvider.removeProducts(checkoutItensProvider.products);
 
                   Navigator.popAndPushNamed(context, '/sucessful-purchase');
                 },

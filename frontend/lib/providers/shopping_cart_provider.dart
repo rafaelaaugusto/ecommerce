@@ -25,7 +25,14 @@ class ShoppingCartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeProducts() {
+  void removeProducts(List<ProductModel> productsToRemove) {
+    for (var product in productsToRemove) {
+      products.remove(product);
+    }
+    notifyListeners();
+  }
+
+  void removeAllProducts() {
     products.clear();
     notifyListeners();
   }

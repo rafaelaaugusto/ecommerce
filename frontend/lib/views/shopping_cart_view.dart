@@ -38,7 +38,7 @@ class ShoppingCartView extends ConsumerWidget {
                             subtitle:
                                 'Tem certeza que deseja remover todos os itens do seu carrinho?',
                             onPressed: () {
-                              cartProvider.removeProducts();
+                              cartProvider.removeAllProducts();
                             },
                           ),
                         );
