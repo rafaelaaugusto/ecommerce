@@ -106,7 +106,10 @@ const snackBarThemeData = SnackBarThemeData(backgroundColor: primary);
 
 const dialogThemeData = DialogTheme(elevation: 0);
 
-const bottomSheetThemeData = BottomSheetThemeData(elevation: 0);
+const bottomSheetThemeData = BottomSheetThemeData(
+  elevation: 0,
+  backgroundColor: onPrimary,
+);
 
 const dividerThemeData = DividerThemeData(color: primaryContainer);
 
@@ -114,5 +117,16 @@ const bottomNavigationBarThemeData = BottomNavigationBarThemeData(
   selectedIconTheme: iconThemeData,
   selectedLabelStyle: TextStyle(
     color: secondary,
+  ),
+);
+
+final cardThemeData = CardTheme(
+  elevation: 0,
+  margin: EdgeInsets.zero,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(Insets.m),
+    side: const BorderSide(
+      color: primaryContainer,
+    ),
   ),
 );

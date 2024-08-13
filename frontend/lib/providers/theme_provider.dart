@@ -19,5 +19,6 @@ class ThemeProvider {
     bottomSheetTheme: bottomSheetThemeData,
     dividerTheme: dividerThemeData,
     bottomNavigationBarTheme: bottomNavigationBarThemeData,
+    cardTheme: cardThemeData,
   );
 }
