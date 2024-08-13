@@ -18,6 +18,19 @@ const createOrder = async (req, res) => {
     }
   }
 
+  const getAllOrders = async (req, res) => {
+    const userId = req.query.userId;
+
+    try {
+      const orders = await Order.find({ 'user.id': userId });
+      console.log(orders);
+      res.status(200).json(orders);
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch orders', error });
+    }
+  }
+
   module.exports = {
     createOrder,
+    getAllOrders,
 }
