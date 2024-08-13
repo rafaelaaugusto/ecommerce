@@ -57,13 +57,14 @@ class _HomeViewState extends ConsumerState<HomeView> {
           )
         : allProducts.isNotBlank
             ? Padding(
-                padding: const EdgeInsets.all(Insets.l * 2),
+                padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
                 child: Column(
                   children: [
                     SearchFilter(
                       filterByText: filterByText,
                     ),
                     ProductsList(products: products),
+                    const SizedBox(height: Insets.l),
                   ],
                 ),
               )

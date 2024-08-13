@@ -24,7 +24,7 @@ class ShoppingCartView extends ConsumerWidget {
       ),
       body: cartProvider.productCount > 0
           ? Padding(
-              padding: const EdgeInsets.all(Insets.l * 2),
+              padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
               child: Column(
                 children: [
                   Align(
@@ -66,7 +66,7 @@ class ShoppingCartView extends ConsumerWidget {
                           const SizedBox(height: Insets.xl),
                     ),
                   ),
-                  const SizedBox(height: Insets.l * 7),
+                  const SizedBox(height: Insets.l * 8),
                 ],
               ),
             )
