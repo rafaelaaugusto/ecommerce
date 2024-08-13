@@ -7,8 +7,8 @@ class OrderModel {
   final List<ProductModel> products;
   final String total;
 
-  OrderModel(
-    this.id, {
+  OrderModel({
+    required this.id,
     required this.user,
     required this.products,
     required this.total,
@@ -20,7 +20,7 @@ class OrderModel {
         .toList();
 
     return OrderModel(
-      data['id'],
+      id: data['id'],
       user: UserModel.fromJson(data['user']),
       products: products,
       total: data['total'],
