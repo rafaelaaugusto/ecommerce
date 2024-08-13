@@ -1,11 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/order_model.dart';
 
+String host = dotenv.env['HOST'] ?? 'localhost';
+
 class OrderService {
-  final String apiUrl = 'http://192.168.15.5:3000/api/orders';
+  final String apiUrl = 'http://$host:3000/api/orders';
 
   Future<bool> createOrder(Map<String, dynamic> orderData) async {
     final response = await http.post(

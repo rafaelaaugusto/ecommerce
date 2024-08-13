@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'providers/theme_provider.dart';
@@ -11,7 +12,8 @@ import 'views/shopping_cart_view.dart';
 import 'views/successful_purchase_view.dart';
 import 'views/tabs_view.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(
     const ProviderScope(
       child: App(),
