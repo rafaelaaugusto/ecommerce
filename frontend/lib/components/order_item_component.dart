@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../models/order_model.dart';
+import '../theme/colors_theme.dart';
 
 class OrderItem extends StatelessWidget {
   final OrderModel order;
@@ -15,6 +16,8 @@ class OrderItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderId = order.id.substring(0, 8);
+
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(
         vertical: Insets.m,
@@ -27,20 +30,41 @@ class OrderItem extends StatelessWidget {
         ),
       ),
       title: Text(
-        order.id,
+        'Pedido: #$orderId',
         style: Theme.of(context).textTheme.titleSmall,
       ),
-      subtitle: Text(
-        UtilBrasilFields.obterReal(
-          double.parse(order.total),
-          moeda: true,
-        ),
-        style: Theme.of(context)
-            .textTheme
-            .titleLarge
-            ?.copyWith(fontSize: Insets.xl),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+              'Total: ${UtilBrasilFields.obterReal(
+                double.parse(order.total),
+                moeda: true,
+              )}',
+              style: Theme.of(context).textTheme.bodySmall),
+          Row(
+            children: [
+              Text(
+                '${order.products.length} itens',
+                style: const TextStyle(fontSize: Insets.xl),
+              ),
+              const Spacer(),
+              Text(
+                order.createdAt!.format('dd/MM/yyyy'),
+                style: const TextStyle(fontSize: Insets.xl),
+              ),
+            ],
+          ),
+        ],
       ),
-      leading: const Icon(AntDesign.codepen_outline),
+      leading: const Icon(
+        FontAwesome.cube_solid,
+        color: secondary,
+      ),
+      trailing: const Icon(
+        Icons.arrow_forward_ios_rounded,
+        size: Insets.xxl,
+      ),
       onTap: () {
         Navigator.pushNamed(
           context,
