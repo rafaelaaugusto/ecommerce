@@ -2,6 +2,7 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:uuid/uuid.dart';
 
 import '../components/forms/user_form.dart';
 import '../models/user_model.dart';
@@ -18,6 +19,7 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
   bool isSaving = false;
 
   FormGroup form = FormGroup({
+    'id': FormControl<String>(value: const Uuid().v4()),
     'name': FormControl<String>(validators: [
       Validators.required,
     ]),

@@ -1,5 +1,3 @@
-import 'package:uuid/uuid.dart';
-
 import 'adress_model.dart';
 
 class UserModel {
@@ -9,8 +7,8 @@ class UserModel {
   final AdressModel adress;
   final String? phone;
 
-  UserModel(
-    this.id, {
+  UserModel({
+    required this.id,
     required this.name,
     required this.email,
     required this.adress,
@@ -19,13 +17,11 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> data) {
     return UserModel(
-      const Uuid().v4(),
+      id: data['id'],
       name: data['name'],
       email: data['email'],
       phone: data['phone'],
-      adress: AdressModel.fromJson(
-        data['adress'],
-      ),
+      adress: AdressModel.fromJson(data['adress']),
     );
   }
   Map<String, dynamic> toMap() {
