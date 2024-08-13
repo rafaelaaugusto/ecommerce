@@ -16,6 +16,8 @@ class OrderModel {
     this.createdAt,
   });
 
+  String get idFormatted => id.substring(0, 8);
+
   factory OrderModel.fromJson(Map<String, dynamic> data) {
     final products = (data['products'] as Iterable)
         .map((product) => ProductModel.fromJson(product))
