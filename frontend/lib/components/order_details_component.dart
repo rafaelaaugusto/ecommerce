@@ -4,7 +4,7 @@ import 'package:icons_plus/icons_plus.dart';
 
 import '../models/product_model.dart';
 import '../models/user_model.dart';
-import 'product_selected_tem_component.dart';
+import 'product_selected_item_component.dart';
 
 class OrderDetails extends StatelessWidget {
   final UserModel user;

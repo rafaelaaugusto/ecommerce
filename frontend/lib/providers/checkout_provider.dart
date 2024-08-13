@@ -16,7 +16,6 @@ class CheckoutProvider extends ChangeNotifier {
 
   void addProduct(ProductModel product) {
     removeProducts();
-
     products.add(product);
     notifyListeners();
   }

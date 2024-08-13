@@ -10,7 +10,6 @@ final shoppingCartProvider = ChangeNotifierProvider<ShoppingCartProvider>(
 class ShoppingCartProvider extends ChangeNotifier {
   final List<ProductModel> products = [];
 
-  List<ProductModel> get productList => [...products];
   int get productCount => products.length;
   double get totalValue => products.fold(
       0, (previousValue, prod) => double.parse(prod.price) + previousValue);
