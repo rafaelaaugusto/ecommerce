@@ -50,10 +50,9 @@ git clone git@github.com:rafaelaaugusto/ecommerce.git
 - `flutter pub get`
 
 ### Create a .env file in the root of the flutter project:
-- `HOST=YOUR_ADRESS_IP`
-
-It will be necessary to use the emulator or physical device.
+To run emulator or physical device.
 Remembering that for an emulator it may be necessary to add the IP address to the emulator as well.
+- `HOST=YOUR_ADRESS_IP`
 
 To run in Chrome:
 - `HOST=localhost`
