@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/order_model.dart';
 
 class OrderService {
-  final String apiUrl = 'http://192.168.1.8:3000/api/orders';
+  final String apiUrl = 'http://192.168.15.5:3000/api/orders';
 
   Future<bool> createOrder(Map<String, dynamic> orderData) async {
     final response = await http.post(
@@ -21,8 +21,10 @@ class OrderService {
     }
   }
 
-  Future<List<OrderModel>> fetchOrders() async {
-    final response = await http.get(Uri.parse(apiUrl));
+  Future<List<OrderModel>> fetchOrders(String userId) async {
+    final response = await http.get(
+      Uri.parse('$apiUrl?userId=$userId'),
+    );
 
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
