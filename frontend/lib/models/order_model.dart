@@ -6,12 +6,14 @@ class OrderModel {
   final UserModel user;
   final List<ProductModel> products;
   final String total;
+  final DateTime? createdAt;
 
   OrderModel({
     required this.id,
     required this.user,
     required this.products,
     required this.total,
+    this.createdAt,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> data) {
@@ -24,6 +26,7 @@ class OrderModel {
       user: UserModel.fromJson(data['user']),
       products: products,
       total: data['total'],
+      createdAt: DateTime.parse(data['createdAt'] as String),
     );
   }
 
@@ -33,6 +36,7 @@ class OrderModel {
       'user': user.toMap(),
       'products': products.map((product) => product.toMap()).toList(),
       'total': total,
+      'createdAt': createdAt.toString(),
     };
   }
 }
