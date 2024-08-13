@@ -61,7 +61,10 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                 : Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 40),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Insets.l * 3,
+                          vertical: Insets.l * 4,
+                        ),
                         child: Text(
                           'Quando você se cadastrar seus dados aparecerão aqui.',
                           textAlign: TextAlign.center,
