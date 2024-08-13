@@ -1,4 +1,0 @@
-#Sun Aug 11 19:51:32 BRT 2024
-base.0=C\:\\Users\\User\\Documents\\ecommerce\\frontend\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
