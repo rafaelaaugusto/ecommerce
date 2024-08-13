@@ -1,7 +1,6 @@
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:frontend/theme/colors_theme.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../providers/user_provider.dart';
@@ -25,13 +24,13 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
           children: [
             Container(
               margin: const EdgeInsets.symmetric(vertical: Insets.xxl),
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: primary,
+                color: Theme.of(context).colorScheme.primary,
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.person,
-                color: onPrimary,
+                color: Theme.of(context).colorScheme.onPrimary,
                 size: 70,
               ),
             ),
@@ -69,7 +68,7 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.popAndPushNamed(
+                          Navigator.pushNamed(
                             context,
                             '/register-user',
                             arguments: true,
@@ -94,7 +93,7 @@ Widget buildInfoTile(BuildContext context, String text, IconData icon) {
     titleTextStyle: Theme.of(context).textTheme.bodySmall,
     leading: Icon(
       icon,
-      color: secondary,
+      color: Theme.of(context).colorScheme.secondary,
       size: 18,
     ),
     title: Text(text),
