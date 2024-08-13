@@ -2,6 +2,7 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../components/empty_data_component.dart';
 import '../components/order_item_component.dart';
 import '../models/order_model.dart';
 import '../providers/user_provider.dart';
@@ -74,7 +75,9 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
                       ? const CircularProgressIndicator(
                           strokeWidth: Insets.xxs,
                         )
-                      : const Text('Você ainda não realizou nenhuma compra.'),
+                      : const EmptyData(
+                          text: 'Você ainda não realizou nenhuma compra.',
+                        ),
                 ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:frontend/components/empty_data_component.dart';
 
 import '../components/dialogs/action_alert_dialog.dart';
 import '../components/product_selected_tem_component.dart';
@@ -70,7 +71,9 @@ class ShoppingCartView extends ConsumerWidget {
                 ],
               ),
             )
-          : _emptyData(context),
+          : const EmptyData(
+              text: 'Carrinho vazio...',
+            ),
       bottomSheet: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Insets.l * 2,
@@ -107,28 +110,6 @@ class ShoppingCartView extends ConsumerWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _emptyData(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.shopping_cart_rounded,
-            color: Theme.of(context).colorScheme.onSecondary,
-            size: Insets.xxl * 2,
-          ),
-          const SizedBox(height: Insets.l),
-          Text(
-            'Carrinho vazio...',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
-          ),
-        ],
       ),
     );
   }
