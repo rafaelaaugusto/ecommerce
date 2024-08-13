@@ -31,7 +31,10 @@ class SuccessfulPurchaseView extends StatelessWidget {
                 Navigator.popAndPushNamed(
                   context,
                   '/order-details',
-                  arguments: order,
+                  arguments: {
+                    'order': order,
+                    'isFromShoppingCart': true,
+                  },
                 );
               },
               child: const Text('Detalhes do pedido'),

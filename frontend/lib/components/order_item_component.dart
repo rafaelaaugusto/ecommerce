@@ -65,7 +65,7 @@ class OrderItem extends StatelessWidget {
           Navigator.pushNamed(
             context,
             '/order-details',
-            arguments: order,
+            arguments: {'order': order},
           );
         },
       ),

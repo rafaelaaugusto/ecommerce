@@ -48,6 +48,8 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
   @override
   Widget build(BuildContext context) {
     final currentUserProvider = ref.watch(userProvider);
+    final bool isFromProfile =
+        ModalRoute.of(context)?.settings.arguments as bool? ?? false;
 
     return Scaffold(
       appBar: AppBar(
@@ -89,7 +91,9 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
                 final user = UserModel.fromJson(form.value);
                 currentUserProvider.setUser(user);
 
-                if (context.mounted) {
+                if (isFromProfile) {
+                  Navigator.pop(context);
+                } else {
                   Navigator.popAndPushNamed(
                     context,
                     '/checkout',
