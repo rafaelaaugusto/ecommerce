@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
+import '../models/order_model.dart';
+
 class SuccessfulPurchaseView extends StatelessWidget {
   const SuccessfulPurchaseView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final OrderModel order =
+        ModalRoute.of(context)?.settings.arguments as OrderModel;
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -23,7 +28,11 @@ class SuccessfulPurchaseView extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.popAndPushNamed(context, '/order-details');
+                Navigator.popAndPushNamed(
+                  context,
+                  '/order-details',
+                  arguments: order,
+                );
               },
               child: const Text('Detalhes do pedido'),
             ),
