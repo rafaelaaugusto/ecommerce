@@ -33,7 +33,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
     } catch (e) {
       hasError = true;
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   void filterByText(String term) {

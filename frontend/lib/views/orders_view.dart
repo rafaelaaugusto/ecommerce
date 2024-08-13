@@ -17,7 +17,7 @@ class OrdersView extends ConsumerStatefulWidget {
 
 class _OrdersViewState extends ConsumerState<OrdersView> {
   OrderService apiService = OrderService();
-  List<OrderModel> orders = [];
+  List<OrderModel>? orders;
   bool hasError = false;
 
   @override
@@ -26,6 +26,8 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
     final user = ref.read(userProvider).currentUser;
     if (user != null) {
       Future.delayed(Duration.zero, () => _fetchOrdersData(user.id));
+    } else {
+      orders = [];
     }
   }
 
@@ -35,13 +37,11 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
     } catch (e) {
       hasError = true;
     }
-    setState(() {});
+    if (mounted) setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.read(userProvider).currentUser;
-
     return Scaffold(
       body: hasError
           ? const Center(
@@ -59,9 +59,9 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
                       const SizedBox(height: Insets.xxl),
                       Expanded(
                         child: ListView.separated(
-                          itemCount: orders.length,
+                          itemCount: orders!.length,
                           itemBuilder: (context, index) => OrderItem(
-                            order: orders[index],
+                            order: orders![index],
                           ),
                           separatorBuilder: (context, index) =>
                               const SizedBox(height: Insets.xl),
@@ -70,15 +70,15 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
                     ],
                   ),
                 )
-              : Center(
-                  child: user != null
-                      ? const CircularProgressIndicator(
-                          strokeWidth: Insets.xxs,
-                        )
-                      : const EmptyData(
-                          text: 'Você ainda não realizou nenhuma compra.',
-                        ),
-                ),
+              : orders == null
+                  ? const Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: Insets.xxs,
+                      ),
+                    )
+                  : const EmptyData(
+                      text: 'Você ainda não realizou nenhuma compra.',
+                    ),
     );
   }
 }
