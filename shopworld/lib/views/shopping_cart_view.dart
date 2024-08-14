@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/dialogs/action_alert_dialog.dart';
 import '../components/empty_data_component.dart';
+import '../components/layout_box_component.dart';
 import '../components/product_selected_item_component.dart';
 import '../providers/checkout_provider.dart';
 import '../providers/shopping_cart_provider.dart';
@@ -24,51 +25,53 @@ class ShoppingCartView extends ConsumerWidget {
         title: const Text('Carrinho'),
       ),
       body: shoppingCart.products.isNotBlank
-          ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: TextButton(
-                      onPressed: () {
-                        showAdaptiveDialog(
-                          context: context,
-                          builder: (context) => ActionAlertDialog(
-                            title: 'Limpar carrinho',
-                            subtitle:
-                                'Tem certeza que deseja remover todos os itens do seu carrinho?',
-                            onPressed: () {
-                              shoppingCart.removeAllProducts();
-                            },
+          ? LayoutBox(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: TextButton(
+                        onPressed: () {
+                          showAdaptiveDialog(
+                            context: context,
+                            builder: (context) => ActionAlertDialog(
+                              title: 'Limpar carrinho',
+                              subtitle:
+                                  'Tem certeza que deseja remover todos os itens do seu carrinho?',
+                              onPressed: () {
+                                shoppingCart.removeAllProducts();
+                              },
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Limpar carrinho',
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontSize: Insets.xl,
                           ),
-                        );
-                      },
-                      child: const Text(
-                        'Limpar carrinho',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: Insets.xl,
                         ),
                       ),
                     ),
-                  ),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: shoppingCart.productCount,
-                      itemBuilder: (context, index) {
-                        final product = shoppingCart.products[index];
-                        return ProductSelectedItem(
-                          product: product,
-                          removeItem: shoppingCart.removeProduct,
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: Insets.xl),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: shoppingCart.productCount,
+                        itemBuilder: (context, index) {
+                          final product = shoppingCart.products[index];
+                          return ProductSelectedItem(
+                            product: product,
+                            removeItem: shoppingCart.removeProduct,
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: Insets.xl),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: Insets.l * 8),
-                ],
+                    const SizedBox(height: Insets.l * 8),
+                  ],
+                ),
               ),
             )
           : const EmptyData(

@@ -5,6 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:uuid/uuid.dart';
 
 import '../components/forms/user_form.dart';
+import '../components/layout_box_component.dart';
 import '../models/user_model.dart';
 import '../providers/user_provider.dart';
 
@@ -56,19 +57,21 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
         title: const Text('Dados para entrega'),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(Insets.l * 2),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Por gentileza, informe seus dados para realizar a compra.',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: Insets.l),
-              UserForm(form: form),
-              const SizedBox(height: Insets.l * 7)
-            ],
+        child: LayoutBox(
+          child: Padding(
+            padding: const EdgeInsets.all(Insets.l * 2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Por gentileza, informe seus dados para realizar a compra.',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: Insets.l),
+                UserForm(form: form),
+                const SizedBox(height: Insets.l * 7)
+              ],
+            ),
           ),
         ),
       ),

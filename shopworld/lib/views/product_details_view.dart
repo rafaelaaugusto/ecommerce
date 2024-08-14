@@ -3,6 +3,7 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../components/layout_box_component.dart';
 import '../components/product_image_component.dart';
 import '../components/shopping_cart_icon_component.dart';
 import '../functions/helper_functions.dart';
@@ -45,68 +46,70 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(Insets.l * 2),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ProductImage(
-                itemId: product.id,
-                width: '400',
-                heigth: '300',
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: Insets.m),
-                child: Text(
-                  product.name,
-                  style: Theme.of(context).textTheme.titleMedium,
+      body: SingleChildScrollView(
+        child: LayoutBox(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ProductImage(
+                  itemId: product.id,
+                  width: '400',
+                  heigth: '300',
                 ),
-              ),
-              Row(
-                children: [
-                  Text(
-                    UtilBrasilFields.obterReal(
-                      double.parse(product.price),
-                      moeda: true,
-                    ),
-                    style: Theme.of(context).textTheme.titleLarge,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: Insets.m),
+                  child: Text(
+                    product.name,
+                    style: Theme.of(context).textTheme.titleMedium,
                   ),
-                  const SizedBox(width: Insets.m),
-                  if (product.hasDiscount && product.discountValue.isNotBlank)
-                    Badge(
-                      backgroundColor: Colors.red.shade200,
-                      label: Text(
-                        getPercentualValue(product.discountValue!),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      UtilBrasilFields.obterReal(
+                        double.parse(product.price),
+                        moeda: true,
                       ),
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                ],
-              ),
-              if (product.description.isNotBlank)
-                buildSection(
-                  context: context,
-                  title: 'Descrição',
-                  text: product.description ?? '',
+                    const SizedBox(width: Insets.m),
+                    if (product.hasDiscount && product.discountValue.isNotBlank)
+                      Badge(
+                        backgroundColor: Colors.red.shade200,
+                        label: Text(
+                          getPercentualValue(product.discountValue!),
+                        ),
+                      ),
+                  ],
                 ),
-              if (product.department.isNotBlank)
-                buildSection(
-                  context: context,
-                  title: 'Categoria',
-                  text: product.department ?? '',
-                ),
-              if (product.material.isNotBlank)
-                buildSection(
-                  context: context,
-                  title: 'Materiais',
-                  text: product.material ?? '',
-                ),
-              if (product.details != null)
-                buildSection(
-                  context: context,
-                  title: 'Detalhes',
-                  text: product.details!.values.join(', '),
-                ),
-            ],
+                if (product.description.isNotBlank)
+                  buildSection(
+                    context: context,
+                    title: 'Descrição',
+                    text: product.description ?? '',
+                  ),
+                if (product.department.isNotBlank)
+                  buildSection(
+                    context: context,
+                    title: 'Categoria',
+                    text: product.department ?? '',
+                  ),
+                if (product.material.isNotBlank)
+                  buildSection(
+                    context: context,
+                    title: 'Materiais',
+                    text: product.material ?? '',
+                  ),
+                if (product.details != null)
+                  buildSection(
+                    context: context,
+                    title: 'Detalhes',
+                    text: product.details!.values.join(', '),
+                  ),
+              ],
+            ),
           ),
         ),
       ),

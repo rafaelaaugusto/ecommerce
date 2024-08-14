@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 
+import '../components/layout_box_component.dart';
 import '../providers/user_provider.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
@@ -42,21 +43,30 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                     ),
               ),
             currentUser != null
-                ? Column(
-                    children: [
-                      const SizedBox(
-                        height: Insets.l * 3,
-                      ),
-                      buildInfoTile(
-                          context, currentUser.email, FontAwesome.envelope),
-                      if (currentUser.phone.isNotBlank)
-                        buildInfoTile(context, currentUser.phone!, Icons.phone),
-                      buildInfoTile(
-                        context,
-                        currentUser.adress.street,
-                        FontAwesome.location_dot_solid,
-                      ),
-                    ],
+                ? LayoutBox(
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: Insets.l * 3,
+                        ),
+                        buildInfoTile(
+                          context,
+                          currentUser.email,
+                          FontAwesome.envelope,
+                        ),
+                        if (currentUser.phone.isNotBlank)
+                          buildInfoTile(
+                            context,
+                            currentUser.phone!,
+                            Icons.phone,
+                          ),
+                        buildInfoTile(
+                          context,
+                          currentUser.adress.street,
+                          FontAwesome.location_dot_solid,
+                        ),
+                      ],
+                    ),
                   )
                 : Column(
                     children: [

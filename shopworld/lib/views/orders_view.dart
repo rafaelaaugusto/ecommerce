@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/empty_data_component.dart';
+import '../components/layout_box_component.dart';
 import '../components/order_item_component.dart';
 import '../models/order_model.dart';
 import '../providers/user_provider.dart';
@@ -48,26 +49,28 @@ class _OrdersViewState extends ConsumerState<OrdersView> {
               child: Text('Erro ao carregar pedidos.'),
             )
           : orders.isNotBlank
-              ? Padding(
-                  padding: const EdgeInsets.all(Insets.l * 2),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Minhas compras',
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      const SizedBox(height: Insets.xxl),
-                      Expanded(
-                        child: ListView.separated(
-                          itemCount: orders!.length,
-                          itemBuilder: (context, index) => OrderItem(
-                            order: orders![index],
-                          ),
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: Insets.xl),
+              ? LayoutBox(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Insets.l * 2),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Minhas compras',
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: Insets.xxl),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: orders!.length,
+                            itemBuilder: (context, index) => OrderItem(
+                              order: orders![index],
+                            ),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: Insets.xl),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 )
               : orders == null
