@@ -1,3 +1,4 @@
+import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 
 import '../models/order_model.dart';
@@ -20,7 +21,7 @@ class SuccessfulPurchaseView extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const Padding(
-              padding: EdgeInsets.symmetric(vertical: 40),
+              padding: EdgeInsets.symmetric(vertical: Insets.l * 4),
               child: Icon(
                 Icons.check_circle_outline,
                 size: 120,
