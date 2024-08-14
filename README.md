@@ -37,7 +37,7 @@ Video Link: https://youtu.be/UqUxi_LYfKk
 - Node.js v20
 
 ### Obtenha o projeto:
-git clone git@github.com:rafaelaaugusto/ecommerce.git
+- `git clone git@github.com:rafaelaaugusto/ecommerce.git`
 
 ### Install dependencies:
 #### Node
