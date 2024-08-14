@@ -16,21 +16,23 @@ class ProductImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: const BorderRadius.all(
-        Radius.circular(Insets.l),
-      ),
-      child: CachedNetworkImage(
-        height: double.parse(heigth),
-        imageUrl: 'https://picsum.photos/$width/$heigth/?random=$itemId',
-        placeholder: (context, url) => const Center(
-          child: CircularProgressIndicator(
-            strokeWidth: Insets.xxs,
-          ),
+    return Center(
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(
+          Radius.circular(Insets.l),
         ),
-        errorWidget: (context, url, error) =>
-            Image.asset('images/notfound.jpg'),
-        fit: BoxFit.cover,
+        child: CachedNetworkImage(
+          height: double.parse(heigth),
+          imageUrl: 'https://picsum.photos/$width/$heigth/?random=$itemId',
+          placeholder: (context, url) => const Center(
+            child: CircularProgressIndicator(
+              strokeWidth: Insets.xxs,
+            ),
+          ),
+          errorWidget: (context, url, error) =>
+              Image.asset('images/notfound.jpg'),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
