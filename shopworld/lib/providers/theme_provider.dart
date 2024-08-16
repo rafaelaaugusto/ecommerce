@@ -9,6 +9,7 @@ final themeProvider = Provider<ThemeProvider>((_) => ThemeProvider());
 class ThemeProvider {
   final ThemeData theme = ThemeData.light(useMaterial3: true).copyWith(
     colorScheme: colorScheme,
+    scaffoldBackgroundColor: onPrimary,
     appBarTheme: appBarTheme,
     inputDecorationTheme: inputDecorationTheme,
     textTheme: textTheme,
