@@ -84,8 +84,8 @@ class ProductSelectedItem extends StatelessWidget {
                   ],
                 ),
               ),
-              if (canRemoveItem && removeItem != null) ...[
-                const SizedBox(width: Insets.l),
+              const SizedBox(width: Insets.l),
+              if (canRemoveItem && removeItem != null)
                 IconButton(
                   icon: const Icon(
                     Icons.close,
@@ -106,7 +106,6 @@ class ProductSelectedItem extends StatelessWidget {
                     );
                   },
                 ),
-              ],
             ],
           ),
         ),
