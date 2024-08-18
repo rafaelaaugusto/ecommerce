@@ -3,11 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/product_model.dart';
 
-final checkoutProvider = ChangeNotifierProvider<CheckoutProvider>(
-  (ref) => CheckoutProvider(),
+final checkoutProvider = ChangeNotifierProvider<CheckoutViewModel>(
+  (ref) => CheckoutViewModel(),
 );
 
-class CheckoutProvider extends ChangeNotifier {
+class CheckoutViewModel extends ChangeNotifier {
   final List<ProductModel> products = [];
 
   int get productCount => products.length;
