@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 import '../components/forms/user_form.dart';
 import '../components/layout_box_component.dart';
 import '../models/user_model.dart';
-import '../providers/user_provider.dart';
+import '../viewmodels/user_view_model.dart';
 
 class RegisterUserView extends ConsumerStatefulWidget {
   const RegisterUserView({super.key});
@@ -48,7 +48,7 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
 
   @override
   Widget build(BuildContext context) {
-    final currentUserProvider = ref.watch(userProvider);
+    final userViewModel = ref.watch(userProvider);
     final bool isFromProfile =
         ModalRoute.of(context)?.settings.arguments as bool? ?? false;
 
@@ -92,7 +92,7 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
                 });
 
                 final user = UserModel.fromJson(form.value);
-                currentUserProvider.setUser(user);
+                userViewModel.setUser(user);
 
                 if (isFromProfile) {
                   Navigator.pop(context);

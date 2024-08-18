@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:icons_plus/icons_plus.dart';
 
 import '../components/layout_box_component.dart';
-import '../providers/user_provider.dart';
+import '../viewmodels/user_view_model.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
   const ProfileView({super.key});
@@ -16,7 +16,8 @@ class ProfileView extends ConsumerStatefulWidget {
 class _ProfileViewState extends ConsumerState<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.watch(userProvider).currentUser;
+    final userViewModel = ref.watch(userProvider);
+    final currentUser = userViewModel.currentUser;
 
     return Padding(
       padding: const EdgeInsets.all(Insets.l * 2),

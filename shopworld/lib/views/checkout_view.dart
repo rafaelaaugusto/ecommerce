@@ -26,7 +26,8 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
   Widget build(BuildContext context) {
     final checkoutViewModel = ref.watch(checkoutProvider);
     final cartViewModel = ref.watch(shoppingCartProvider);
-    final currentUser = ref.watch(userProvider).currentUser!;
+    final userViewModel = ref.watch(userProvider);
+    final currentUser = userViewModel.currentUser!;
 
     void onWillPop() {
       showAdaptiveDialog(

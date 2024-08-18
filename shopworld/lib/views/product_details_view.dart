@@ -27,7 +27,8 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
   Widget build(BuildContext context) {
     final cartViewModel = ref.watch(shoppingCartProvider);
     final checkoutViewModel = ref.watch(checkoutProvider);
-    final currentUser = ref.watch(userProvider).currentUser;
+    final userViewModel = ref.watch(userProvider);
+    final currentUser = userViewModel.currentUser;
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
 

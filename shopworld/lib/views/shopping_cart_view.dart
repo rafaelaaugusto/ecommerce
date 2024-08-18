@@ -17,7 +17,7 @@ class ShoppingCartView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final cartViewModel = ref.watch(shoppingCartProvider);
-    final currentUserProvider = ref.watch(userProvider);
+    final userViewModel = ref.watch(userProvider);
     final checkoutViewModel = ref.watch(checkoutProvider);
 
     return Scaffold(
@@ -96,7 +96,7 @@ class ShoppingCartView extends ConsumerWidget {
               onPressed: cartViewModel.productCount > 0
                   ? () {
                       checkoutViewModel.addProducts(cartViewModel.products);
-                      if (currentUserProvider.currentUser != null) {
+                      if (userViewModel.currentUser != null) {
                         Navigator.pushNamed(
                           context,
                           '/checkout',
