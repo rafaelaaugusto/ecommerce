@@ -8,10 +8,10 @@ import '../components/product_image_component.dart';
 import '../components/shopping_cart_icon_component.dart';
 import '../functions/helper_functions.dart';
 import '../models/product_model.dart';
-import '../providers/checkout_provider.dart';
-import '../providers/shopping_cart_provider.dart';
-import '../providers/user_provider.dart';
 import '../theme/styles_theme.dart';
+import '../viewmodels/checkout_view_model.dart';
+import '../viewmodels/shopping_cart_view_model.dart';
+import '../viewmodels/user_view_model.dart';
 
 class ProductDetailsView extends ConsumerStatefulWidget {
   const ProductDetailsView({super.key});
@@ -26,7 +26,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
   @override
   Widget build(BuildContext context) {
     final shoppingCart = ref.watch(shoppingCartProvider);
-    final checkout = ref.watch(checkoutProvider);
+    final checkoutViewModel = ref.watch(checkoutProvider);
     final currentUser = ref.watch(userProvider).currentUser;
     final ProductModel product =
         ModalRoute.of(context)?.settings.arguments as ProductModel;
@@ -155,7 +155,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
                     isLoading = true;
                   });
 
-                  checkout.addProduct(product);
+                  checkoutViewModel.addProduct(product);
                   if (currentUser != null) {
                     Navigator.pushNamed(context, '/checkout').then(
                       (value) => setState(() {

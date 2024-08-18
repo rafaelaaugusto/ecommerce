@@ -7,9 +7,9 @@ import '../components/dialogs/action_alert_dialog.dart';
 import '../components/empty_data_component.dart';
 import '../components/layout_box_component.dart';
 import '../components/product_selected_item_component.dart';
-import '../providers/checkout_provider.dart';
-import '../providers/shopping_cart_provider.dart';
-import '../providers/user_provider.dart';
+import '../viewmodels/checkout_view_model.dart';
+import '../viewmodels/shopping_cart_view_model.dart';
+import '../viewmodels/user_view_model.dart';
 
 class ShoppingCartView extends ConsumerWidget {
   const ShoppingCartView({super.key});
@@ -18,7 +18,7 @@ class ShoppingCartView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final shoppingCart = ref.watch(shoppingCartProvider);
     final currentUserProvider = ref.watch(userProvider);
-    final checkout = ref.watch(checkoutProvider);
+    final checkoutViewModel = ref.watch(checkoutProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -95,7 +95,7 @@ class ShoppingCartView extends ConsumerWidget {
             ElevatedButton(
               onPressed: shoppingCart.productCount > 0
                   ? () {
-                      checkout.addProducts(shoppingCart.products);
+                      checkoutViewModel.addProducts(shoppingCart.products);
                       if (currentUserProvider.currentUser != null) {
                         Navigator.pushNamed(
                           context,

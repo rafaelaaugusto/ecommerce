@@ -7,10 +7,10 @@ import 'package:uuid/uuid.dart';
 import '../components/dialogs/action_alert_dialog.dart';
 import '../components/order_details_component.dart';
 import '../models/order_model.dart';
-import '../providers/checkout_provider.dart';
-import '../providers/shopping_cart_provider.dart';
-import '../providers/user_provider.dart';
 import '../services/order_service.dart';
+import '../viewmodels/checkout_view_model.dart';
+import '../viewmodels/shopping_cart_view_model.dart';
+import '../viewmodels/user_view_model.dart';
 
 class CheckoutView extends ConsumerStatefulWidget {
   const CheckoutView({super.key});
@@ -24,7 +24,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
 
   @override
   Widget build(BuildContext context) {
-    final checkout = ref.watch(checkoutProvider);
+    final checkoutViewModel = ref.watch(checkoutProvider);
     final shoppingCart = ref.watch(shoppingCartProvider);
     final currentUser = ref.watch(userProvider).currentUser!;
 
@@ -38,7 +38,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
           onPressed: () => Future.delayed(
             Duration.zero,
             () {
-              checkout.removeProducts();
+              checkoutViewModel.removeProducts();
               Navigator.popAndPushNamed(context, '/');
             },
           ),
@@ -58,7 +58,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
         ),
         body: OrderDetails(
           user: currentUser,
-          products: checkout.products,
+          products: checkoutViewModel.products,
         ),
         bottomSheet: Padding(
           padding: const EdgeInsets.symmetric(
@@ -70,7 +70,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
             children: [
               Text(
                 'Total: ${UtilBrasilFields.obterReal(
-                  checkout.totalValue,
+                  checkoutViewModel.totalValue,
                   moeda: true,
                 )}',
                 style: Theme.of(context).textTheme.titleLarge,
@@ -79,13 +79,13 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                 onPressed: () {
                   final order = OrderModel(
                     id: const Uuid().v4(),
-                    products: checkout.products,
-                    total: checkout.totalValue.toString(),
+                    products: checkoutViewModel.products,
+                    total: checkoutViewModel.totalValue.toString(),
                     user: currentUser,
                   );
                   orderService.createOrder(order.toMap());
 
-                  shoppingCart.removeProducts(checkout.products);
+                  shoppingCart.removeProducts(checkoutViewModel.products);
 
                   Navigator.popAndPushNamed(
                     context,
