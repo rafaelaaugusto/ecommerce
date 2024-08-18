@@ -25,7 +25,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final shoppingCart = ref.watch(shoppingCartProvider);
+    final cartViewModel = ref.watch(shoppingCartProvider);
     final checkoutViewModel = ref.watch(checkoutProvider);
     final currentUser = ref.watch(userProvider).currentUser;
     final ProductModel product =
@@ -42,7 +42,7 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
                 '/shopping-cart',
               );
             },
-            productCount: shoppingCart.productCount,
+            productCount: cartViewModel.productCount,
           ),
         ],
       ),
@@ -124,8 +124,8 @@ class _ProductDetailsViewState extends ConsumerState<ProductDetailsView> {
               child: ElevatedButton(
                 style: elevatedButtonOutlinedThemeData.style,
                 onPressed: () {
-                  if (!shoppingCart.products.contains(product)) {
-                    shoppingCart.addProduct(product);
+                  if (!cartViewModel.products.contains(product)) {
+                    cartViewModel.addProduct(product);
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Produto adicionado ao carrinho!'),

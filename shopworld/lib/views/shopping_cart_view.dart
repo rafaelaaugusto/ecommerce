@@ -16,7 +16,7 @@ class ShoppingCartView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final shoppingCart = ref.watch(shoppingCartProvider);
+    final cartViewModel = ref.watch(shoppingCartProvider);
     final currentUserProvider = ref.watch(userProvider);
     final checkoutViewModel = ref.watch(checkoutProvider);
 
@@ -24,7 +24,7 @@ class ShoppingCartView extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Carrinho'),
       ),
-      body: shoppingCart.products.isNotBlank
+      body: cartViewModel.products.isNotBlank
           ? LayoutBox(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Insets.l * 2),
@@ -41,7 +41,7 @@ class ShoppingCartView extends ConsumerWidget {
                               subtitle:
                                   'Tem certeza que deseja remover todos os itens do seu carrinho?',
                               onPressed: () {
-                                shoppingCart.removeAllProducts();
+                                cartViewModel.removeAllProducts();
                               },
                             ),
                           );
@@ -57,12 +57,12 @@ class ShoppingCartView extends ConsumerWidget {
                     ),
                     Expanded(
                       child: ListView.separated(
-                        itemCount: shoppingCart.productCount,
+                        itemCount: cartViewModel.productCount,
                         itemBuilder: (context, index) {
-                          final product = shoppingCart.products[index];
+                          final product = cartViewModel.products[index];
                           return ProductSelectedItem(
                             product: product,
-                            removeItem: shoppingCart.removeProduct,
+                            removeItem: cartViewModel.removeProduct,
                           );
                         },
                         separatorBuilder: (context, index) =>
@@ -87,15 +87,15 @@ class ShoppingCartView extends ConsumerWidget {
           children: [
             Text(
               'Total: ${UtilBrasilFields.obterReal(
-                shoppingCart.totalValue,
+                cartViewModel.totalValue,
                 moeda: true,
               )}',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             ElevatedButton(
-              onPressed: shoppingCart.productCount > 0
+              onPressed: cartViewModel.productCount > 0
                   ? () {
-                      checkoutViewModel.addProducts(shoppingCart.products);
+                      checkoutViewModel.addProducts(cartViewModel.products);
                       if (currentUserProvider.currentUser != null) {
                         Navigator.pushNamed(
                           context,

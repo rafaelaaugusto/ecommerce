@@ -25,7 +25,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
   @override
   Widget build(BuildContext context) {
     final checkoutViewModel = ref.watch(checkoutProvider);
-    final shoppingCart = ref.watch(shoppingCartProvider);
+    final cartViewModel = ref.watch(shoppingCartProvider);
     final currentUser = ref.watch(userProvider).currentUser!;
 
     void onWillPop() {
@@ -84,8 +84,7 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
                     user: currentUser,
                   );
                   orderService.createOrder(order.toMap());
-
-                  shoppingCart.removeProducts(checkoutViewModel.products);
+                  cartViewModel.removeProducts(checkoutViewModel.products);
 
                   Navigator.popAndPushNamed(
                     context,

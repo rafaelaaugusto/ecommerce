@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/shopping_cart_icon_component.dart';
-import '../providers/shopping_cart_provider.dart';
+import '../viewmodels/shopping_cart_view_model.dart';
 import 'home_view.dart';
 import 'orders_view.dart';
 import 'profile_view.dart';
@@ -31,7 +31,7 @@ class _TabsViewState extends ConsumerState<TabsView> {
 
   @override
   Widget build(BuildContext context) {
-    final shoppingCart = ref.watch(shoppingCartProvider);
+    final cartViewModel = ref.watch(shoppingCartProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +45,7 @@ class _TabsViewState extends ConsumerState<TabsView> {
                 '/shopping-cart',
               );
             },
-            productCount: shoppingCart.productCount,
+            productCount: cartViewModel.productCount,
           ),
         ],
       ),
