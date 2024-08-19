@@ -10,11 +10,11 @@ String host = dotenv.env['HOST'] ?? 'localhost';
 class OrderService {
   final String apiUrl = 'http://$host:3000/api/orders';
 
-  Future<bool> createOrder(Map<String, dynamic> orderData) async {
+  Future<bool> createOrder(OrderModel order) async {
     final response = await http.post(
       Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode(orderData),
+      body: json.encode(order.toMap()),
     );
 
     if (response.statusCode == 201) {
