@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'theme/theme_provider.dart';
 import 'theme/styles_theme.dart';
+import 'theme/theme_provider.dart';
 import 'views/checkout_view.dart';
 import 'views/order_details_view.dart';
 import 'views/product_details_view.dart';

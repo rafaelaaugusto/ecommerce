@@ -6,8 +6,8 @@ import '../components/empty_data_component.dart';
 import '../components/layout_box_component.dart';
 import '../components/order_item_component.dart';
 import '../models/order_model.dart';
-import '../providers/user_provider.dart';
 import '../services/order_service.dart';
+import '../viewmodels/user_view_model.dart';
 
 class OrdersView extends ConsumerStatefulWidget {
   const OrdersView({super.key});
