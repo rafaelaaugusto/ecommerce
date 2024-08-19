@@ -26,9 +26,11 @@ Video Link: https://youtu.be/UqUxi_LYfKk
 - Profile screen with user data
 
 ## Technologies
-- Application in Flutter
-- Api in Node
-- Database: MongoDB
+### Flutter application
+- MVVM architecture
+- State management: Riverpod
+### API on Nodejs
+### Database: MongoDB
 
 ## Installation
 ### Prerequisites
