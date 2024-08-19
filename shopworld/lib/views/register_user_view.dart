@@ -2,7 +2,6 @@ import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:uuid/uuid.dart';
 
 import '../components/forms/user_form.dart';
 import '../components/layout_box_component.dart';
@@ -20,7 +19,7 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
   bool isSaving = false;
 
   FormGroup form = FormGroup({
-    'id': FormControl<String>(value: const Uuid().v4()),
+    'id': FormControl<String>(),
     'name': FormControl<String>(validators: [
       Validators.required,
     ]),
@@ -91,7 +90,10 @@ class _RegisterUserViewState extends ConsumerState<RegisterUserView> {
                   isSaving = true;
                 });
 
-                final user = UserModel.fromJson(form.value);
+                final user = UserModel.fromJson(
+                  userViewModel.getId,
+                  form.value,
+                );
                 userViewModel.setUser(user);
 
                 if (isFromProfile) {

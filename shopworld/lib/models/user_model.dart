@@ -7,17 +7,17 @@ class UserModel {
   final AdressModel adress;
   final String? phone;
 
-  UserModel({
-    required this.id,
+  UserModel(
+    this.id, {
     required this.name,
     required this.email,
     required this.adress,
     this.phone,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> data) {
+  factory UserModel.fromJson(String id, Map<String, dynamic> data) {
     return UserModel(
-      id: data['id'],
+      id,
       name: data['name'],
       email: data['email'],
       phone: data['phone'],

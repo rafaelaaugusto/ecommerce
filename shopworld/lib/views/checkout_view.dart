@@ -2,7 +2,6 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:fleasy/fleasy.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 import '../components/dialogs/action_alert_dialog.dart';
 import '../components/order_details_component.dart';
@@ -79,12 +78,13 @@ class _CheckoutViewState extends ConsumerState<CheckoutView> {
               ElevatedButton(
                 onPressed: () {
                   final order = OrderModel(
-                    id: const Uuid().v4(),
+                    id: checkoutViewModel.getId,
                     products: checkoutViewModel.products,
                     total: checkoutViewModel.totalValue.toString(),
                     user: currentUser,
                   );
-                  orderService.createOrder(order.toMap());
+
+                  orderService.createOrder(order);
                   cartViewModel.removeProducts(checkoutViewModel.products);
 
                   Navigator.popAndPushNamed(

@@ -25,7 +25,10 @@ class OrderModel {
 
     return OrderModel(
       id: data['id'],
-      user: UserModel.fromJson(data['user']),
+      user: UserModel.fromJson(
+        data['user']['id'],
+        data['user'],
+      ),
       products: products,
       total: data['total'],
       createdAt: DateTime.parse(data['createdAt'] as String),
