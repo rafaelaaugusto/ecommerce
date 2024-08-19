@@ -25,7 +25,7 @@ An ecommerce of diversified products
 
 ## Technologies
 ### Flutter application
-- MVVM architecture
+- MVVM pattern
 - State management: Riverpod
 ### API on Nodejs
 ### Database: MongoDB
