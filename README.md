@@ -4,8 +4,6 @@
 An ecommerce of diversified products
 
 ## Demonstration
-Video Link: https://youtu.be/UqUxi_LYfKk
-
 <img src="https://github.com/user-attachments/assets/f38391e0-df2d-4022-a4de-87806bdb9896" heigth="250" width="250">
 <img src="https://github.com/user-attachments/assets/cddb6f85-afb1-49ce-b353-dbac40cd715c" heigth="250" width="250">
 <img src="https://github.com/user-attachments/assets/c4310be2-bb01-4094-be2d-3421931f2b4c" heigth="250" width="250">
