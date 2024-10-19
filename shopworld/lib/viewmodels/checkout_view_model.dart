@@ -22,9 +22,9 @@ class CheckoutViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addProducts(List<ProductModel> productsSeletected) {
+  void addProducts(List<ProductModel> productsSelected) {
     removeProducts();
-    products.addAll([...productsSeletected]);
+    products.addAll([...productsSelected]);
     notifyListeners();
   }
 
